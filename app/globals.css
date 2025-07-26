@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 10 10 10;
+    --foreground: 255 255 255;
+    --card: 26 26 26;
+    --card-foreground: 255 255 255;
+    --primary: 192 192 192;
+    --primary-foreground: 10 10 10;
+    --secondary: 42 42 42;
+    --secondary-foreground: 229 229 229;
+    --muted: 107 114 128;
+    --muted-foreground: 192 192 192;
+    --accent: 229 229 229;
+    --accent-foreground: 10 10 10;
+    --destructive: 239 68 68;
+    --destructive-foreground: 255 255 255;
+    --border: 42 42 42;
+    --input: 42 42 42;
+    --ring: 192 192 192;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent;
+  }
+
+  .chrome-gradient {
+    background: linear-gradient(135deg, #c0c0c0 0%, #ffffff 50%, #e5e5e5 100%);
+  }
+
+  .metallic-shine {
+    background: linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.1) 0%,
+      rgba(255, 255, 255, 0.3) 50%,
+      rgba(255, 255, 255, 0.1) 100%
+    );
+  }
+
+  .glass-morphism {
+    background: rgba(42, 42, 42, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(192, 192, 192, 0.1);
+  }
+
+  .animated-border {
+    background: conic-gradient(
+      from 0deg,
+      transparent,
+      rgba(255, 255, 255, 0.8),
+      transparent,
+      rgba(192, 192, 192, 0.6),
+      transparent
+    );
+  }
+}
+
+body {
+  background: radial-gradient(circle at 20% 20%, rgba(26, 26, 26, 0.8) 0%, rgba(10, 10, 10, 1) 70%);
+}
+
+.chrome-sphere {
+  background: radial-gradient(
+    circle at 30% 30%,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(200, 200, 200, 0.8) 30%,
+    rgba(100, 100, 100, 0.6) 60%,
+    rgba(26, 26, 26, 0.9) 100%
+  );
+  filter: drop-shadow(0 20px 40px rgba(255, 255, 255, 0.1));
+}
