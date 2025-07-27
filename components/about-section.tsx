@@ -1,128 +1,190 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Code2, Brain, Camera, Zap } from "lucide-react"
+import { Code, Palette, Zap, Users, Trophy, Lightbulb } from "lucide-react"
 
 const AboutSection = () => {
-  const skills = [
+  const highlights = [
     {
-      icon: <Code2 className="w-8 h-8" />,
-      title: "Full-Stack Development",
-      description: "Building scalable web applications with modern frameworks like Next.js, React, and Node.js.",
+      icon: Code,
+      text: "5+ years of full-stack development expertise",
     },
     {
-      icon: <Brain className="w-8 h-8" />,
-      title: "AI Automation",
-      description: "Creating intelligent workflows and automation solutions using n8n and API integrations.",
+      icon: Zap,
+      text: "AI automation specialist with proven results",
     },
     {
-      icon: <Camera className="w-8 h-8" />,
-      title: "Visual Content Creation",
-      description: "Professional photography, videography, and content creation for digital platforms.",
+      icon: Palette,
+      text: "Creative problem solver with design thinking",
     },
     {
-      icon: <Zap className="w-8 h-8" />,
-      title: "Performance Optimization",
-      description: "Optimizing applications for speed, SEO, and exceptional user experiences.",
+      icon: Users,
+      text: "Team leader and mentor to junior developers",
+    },
+    {
+      icon: Trophy,
+      text: "Delivered 50+ successful projects",
+    },
+    {
+      icon: Lightbulb,
+      text: "Innovation-driven with cutting-edge solutions",
     },
   ]
 
+  const skills = [
+    { category: "Frontend", items: ["React", "Next.js", "TypeScript", "Tailwind CSS"] },
+    { category: "Backend", items: ["Node.js", "Python", "PostgreSQL", "MongoDB"] },
+    { category: "AI/Automation", items: ["OpenAI API", "n8n", "Zapier", "Custom APIs"] },
+    { category: "Tools", items: ["Git", "Docker", "AWS", "Vercel"] },
+  ]
+
   return (
-    <section id="about" className="py-20 relative">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="about" className="min-h-screen flex items-center py-16 relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
-          <h2 className="text-4xl lg:text-6xl font-bold text-gradient mb-6">About Me</h2>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            I'm a passionate technologist who bridges the gap between cutting-edge development and creative expression.
-            With expertise spanning full-stack development, AI automation, and visual storytelling, I bring a unique
-            perspective to every project.
+          <h2 className="text-3xl lg:text-4xl font-bold text-gradient mb-4">About Me</h2>
+          <p className="text-base text-gray-300 max-w-2xl mx-auto">
+            Passionate developer crafting digital experiences with modern technologies
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
+        <div className="grid lg:grid-cols-2 gap-8 items-start">
+          {/* Left Column - Story & Highlights */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
             className="space-y-6"
           >
-            <h3 className="text-2xl font-bold text-white mb-4">My Journey</h3>
-            <p className="text-gray-300 leading-relaxed">
-              My journey began with a fascination for how technology can transform ideas into reality. Over the years,
-              I've evolved from a curious developer into a multidisciplinary creator who leverages the latest in web
-              technologies, artificial intelligence, and visual media.
-            </p>
-            <p className="text-gray-300 leading-relaxed">
-              I believe in the power of continuous learning and staying ahead of technological trends. Whether it's
-              implementing cutting-edge React features, building AI-powered automation workflows, or capturing
-              compelling visual narratives, I approach each project with innovation and attention to detail.
-            </p>
-            <div className="flex flex-wrap gap-3 pt-4">
-              {["Next.js", "TypeScript", "AI/ML", "n8n", "Photography", "Video Production"].map((skill) => (
-                <span
-                  key={skill}
-                  className="px-4 py-2 bg-gray-800 border border-gray-600 rounded-full text-sm text-gray-300"
-                >
-                  {skill}
-                </span>
-              ))}
+            <div className="glass-morphism rounded-2xl p-6">
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="w-6 h-6 chrome-gradient rounded-full" />
+                <h3 className="text-lg font-semibold text-white">My Story</h3>
+              </div>
+              <p className="text-sm text-gray-300 leading-relaxed mb-4">
+                I'm a passionate full-stack developer and AI automation specialist with over 5 years of experience
+                creating innovative digital solutions. My journey spans from crafting elegant user interfaces to
+                building robust backend systems and implementing intelligent automation workflows.
+              </p>
+              <p className="text-sm text-gray-300 leading-relaxed">
+                I thrive on solving complex problems and turning ideas into reality through clean, efficient code and
+                cutting-edge technologies.
+              </p>
+            </div>
+
+            <div className="glass-morphism rounded-2xl p-6">
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="w-6 h-6 chrome-gradient rounded-full" />
+                <h3 className="text-lg font-semibold text-white">Key Highlights</h3>
+              </div>
+              <div className="grid gap-3">
+                {highlights.map((highlight, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    className="flex items-center space-x-3 group hover:bg-gray-800/20 rounded-lg p-2 transition-all duration-200"
+                  >
+                    {/* Triple-layer shiny bullet */}
+                    <div className="relative flex-shrink-0">
+                      {/* Outer glow ring */}
+                      <div className="absolute inset-0 w-4 h-4 chrome-gradient rounded-full opacity-0 group-hover:opacity-30 group-hover:scale-150 transition-all duration-500" />
+                      {/* Main chrome bullet */}
+                      <div className="relative w-4 h-4 chrome-gradient rounded-full group-hover:scale-110 transition-all duration-300 flex items-center justify-center">
+                        {/* Inner shine */}
+                        <div className="w-1.5 h-1.5 bg-white/40 rounded-full group-hover:bg-white/60 transition-all duration-300" />
+                      </div>
+                    </div>
+                    <highlight.icon className="w-4 h-4 text-gray-400 group-hover:text-white transition-colors flex-shrink-0" />
+                    <span className="text-sm text-gray-300 group-hover:text-white transition-colors">
+                      {highlight.text}
+                    </span>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </motion.div>
 
+          {/* Right Column - Skills */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
             viewport={{ once: true }}
-            className="glass-morphism rounded-2xl p-8"
+            className="space-y-6"
           >
-            <h3 className="text-xl font-bold text-white mb-6">What Drives Me</h3>
-            <div className="space-y-4">
-              <div className="flex items-center space-x-3">
-                <div className="w-2 h-2 chrome-gradient rounded-full"></div>
-                <span className="text-gray-300">Creating seamless user experiences</span>
+            <div className="glass-morphism rounded-2xl p-6">
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="w-6 h-6 chrome-gradient rounded-full" />
+                <h3 className="text-lg font-semibold text-white">Technical Skills</h3>
               </div>
-              <div className="flex items-center space-x-3">
-                <div className="w-2 h-2 chrome-gradient rounded-full"></div>
-                <span className="text-gray-300">Automating complex workflows</span>
+              <div className="grid gap-4">
+                {skills.map((skillGroup, index) => (
+                  <motion.div
+                    key={skillGroup.category}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                    className="group"
+                  >
+                    <h4 className="text-sm font-medium text-gray-400 mb-2 group-hover:text-white transition-colors">
+                      {skillGroup.category}
+                    </h4>
+                    <div className="flex flex-wrap gap-1.5">
+                      {skillGroup.items.map((skill) => (
+                        <span
+                          key={skill}
+                          className="px-2 py-1 bg-gray-800/50 border border-gray-600/30 rounded-md text-xs text-gray-300 hover:border-gray-400/50 hover:bg-gray-700/50 hover:scale-105 transition-all duration-200"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </motion.div>
+                ))}
               </div>
-              <div className="flex items-center space-x-3">
-                <div className="w-2 h-2 chrome-gradient rounded-full"></div>
-                <span className="text-gray-300">Pushing creative boundaries</span>
+            </div>
+
+            <div className="glass-morphism rounded-2xl p-6">
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="w-6 h-6 chrome-gradient rounded-full" />
+                <h3 className="text-lg font-semibold text-white">What I Do</h3>
               </div>
-              <div className="flex items-center space-x-3">
-                <div className="w-2 h-2 chrome-gradient rounded-full"></div>
-                <span className="text-gray-300">Delivering exceptional results</span>
+              <div className="space-y-3">
+                <div className="flex items-start space-x-3">
+                  <div className="w-2 h-2 chrome-gradient rounded-full mt-2 flex-shrink-0" />
+                  <div>
+                    <h4 className="text-sm font-medium text-white mb-1">Full-Stack Development</h4>
+                    <p className="text-xs text-gray-400">End-to-end web applications with modern frameworks</p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <div className="w-2 h-2 chrome-gradient rounded-full mt-2 flex-shrink-0" />
+                  <div>
+                    <h4 className="text-sm font-medium text-white mb-1">AI Automation</h4>
+                    <p className="text-xs text-gray-400">Intelligent workflows and process optimization</p>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-3">
+                  <div className="w-2 h-2 chrome-gradient rounded-full mt-2 flex-shrink-0" />
+                  <div>
+                    <h4 className="text-sm font-medium text-white mb-1">Content Creation</h4>
+                    <p className="text-xs text-gray-400">High-quality visual content and digital media</p>
+                  </div>
+                </div>
               </div>
             </div>
           </motion.div>
-        </div>
-
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {skills.map((skill, index) => (
-            <motion.div
-              key={skill.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1.05, y: -5 }}
-              className="glass-morphism rounded-xl p-6 text-center group hover:bg-gray-800/20 transition-all duration-300"
-            >
-              <div className="inline-flex items-center justify-center w-16 h-16 chrome-gradient rounded-full mb-4 group-hover:scale-110 transition-transform duration-300">
-                <div className="text-black">{skill.icon}</div>
-              </div>
-              <h4 className="text-lg font-semibold text-white mb-3">{skill.title}</h4>
-              <p className="text-gray-400 text-sm leading-relaxed">{skill.description}</p>
-            </motion.div>
-          ))}
         </div>
       </div>
     </section>

@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Calendar, MapPin } from "lucide-react"
+import { Calendar, MapPin, Award, TrendingUp } from "lucide-react"
 
 const ExperienceSection = () => {
   const experiences = [
@@ -20,6 +20,7 @@ const ExperienceSection = () => {
       ],
       technologies: ["Next.js", "TypeScript", "Node.js", "PostgreSQL", "AWS"],
       logo: "🚀",
+      color: "from-blue-500 to-cyan-500",
     },
     {
       id: 2,
@@ -36,6 +37,7 @@ const ExperienceSection = () => {
       ],
       technologies: ["n8n", "Python", "OpenAI API", "Zapier", "MongoDB"],
       logo: "🤖",
+      color: "from-purple-500 to-pink-500",
     },
     {
       id: 3,
@@ -52,107 +54,116 @@ const ExperienceSection = () => {
       ],
       technologies: ["React", "Express.js", "Adobe Creative Suite", "Final Cut Pro"],
       logo: "🎬",
+      color: "from-orange-500 to-red-500",
     },
   ]
 
   return (
-    <section id="experience" className="py-20 relative">
+    <section id="experience" className="py-16 relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="text-center mb-16"
+          className="text-center mb-12"
         >
-          <h2 className="text-3xl lg:text-5xl font-bold text-gradient mb-6">Experience</h2>
-          <p className="text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed">
-            A journey through innovative companies where I've crafted digital solutions and automated complex workflows
+          <h2 className="text-3xl lg:text-4xl font-bold text-gradient mb-4">Experience</h2>
+          <p className="text-base text-gray-300 max-w-2xl mx-auto">
+            A journey through innovative companies where I've crafted digital solutions
           </p>
         </motion.div>
 
-        <div className="relative">
-          {/* Timeline line */}
-          <div className="absolute left-8 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-gray-600 to-transparent hidden lg:block" />
-
-          <div className="space-y-12">
-            {experiences.map((exp, index) => (
-              <motion.div
-                key={exp.id}
-                initial={{ opacity: 0, x: index % 2 === 0 ? -50 : 50 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.8, delay: index * 0.2 }}
-                viewport={{ once: true }}
-                className={`relative lg:grid lg:grid-cols-2 lg:gap-12 items-center ${
-                  index % 2 === 1 ? "lg:grid-flow-col-dense" : ""
-                }`}
-              >
-                {/* Timeline dot */}
-                <div className="absolute left-6 w-4 h-4 chrome-gradient rounded-full hidden lg:block transform -translate-x-1/2" />
-
-                {/* Company logo and basic info */}
-                <div className={`${index % 2 === 1 ? "lg:col-start-2" : ""}`}>
-                  <motion.div whileHover={{ scale: 1.02, y: -5 }} className="glass-morphism rounded-2xl p-8 h-full">
-                    <div className="flex items-start space-x-4 mb-6">
-                      <div className="text-4xl">{exp.logo}</div>
-                      <div className="flex-1">
-                        <h3 className="text-xl font-bold text-white mb-1">{exp.company}</h3>
-                        <p className="text-lg text-gray-300 mb-2">{exp.position}</p>
-                        <div className="flex flex-wrap gap-4 text-sm text-gray-400">
-                          <div className="flex items-center space-x-1">
-                            <Calendar className="w-4 h-4" />
-                            <span>{exp.duration}</span>
-                          </div>
-                          <div className="flex items-center space-x-1">
-                            <MapPin className="w-4 h-4" />
-                            <span>{exp.location}</span>
-                          </div>
+        <div className="space-y-8">
+          {experiences.map((exp, index) => (
+            <motion.div
+              key={exp.id}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="glass-morphism rounded-2xl p-6 hover:bg-gray-800/30 transition-all duration-300"
+            >
+              <div className="grid lg:grid-cols-2 gap-6">
+                {/* Left Side - Company Info */}
+                <div className="space-y-4">
+                  <div className="flex items-start space-x-4">
+                    <div className="text-3xl">{exp.logo}</div>
+                    <div className="flex-1">
+                      <div className="flex items-center space-x-3 mb-2">
+                        <h3 className="text-lg font-bold text-white">{exp.company}</h3>
+                        <div className={`w-12 h-0.5 bg-gradient-to-r ${exp.color} rounded-full`} />
+                      </div>
+                      <p className="text-base text-gray-300 mb-2">{exp.position}</p>
+                      <div className="flex flex-wrap gap-3 text-xs text-gray-400">
+                        <div className="flex items-center space-x-1">
+                          <Calendar className="w-3 h-3" />
+                          <span>{exp.duration}</span>
+                        </div>
+                        <div className="flex items-center space-x-1">
+                          <MapPin className="w-3 h-3" />
+                          <span>{exp.location}</span>
                         </div>
                       </div>
                     </div>
+                  </div>
 
-                    <p className="text-gray-300 leading-relaxed mb-6">{exp.description}</p>
+                  <p className="text-sm text-gray-300 leading-relaxed">{exp.description}</p>
 
-                    <div className="flex flex-wrap gap-2">
-                      {exp.technologies.map((tech) => (
-                        <span
-                          key={tech}
-                          className="px-3 py-1 bg-gray-800 border border-gray-600 rounded-full text-xs text-gray-300"
-                        >
-                          {tech}
-                        </span>
-                      ))}
+                  <div className="flex flex-wrap gap-1.5">
+                    {exp.technologies.map((tech) => (
+                      <span
+                        key={tech}
+                        className="px-2 py-1 bg-gray-800/50 border border-gray-600/30 rounded-md text-xs text-gray-300"
+                      >
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Right Side - Achievements */}
+                <div className="space-y-3">
+                  <div className="flex items-center space-x-2 mb-3">
+                    <div
+                      className={`w-5 h-5 bg-gradient-to-r ${exp.color} rounded-full flex items-center justify-center`}
+                    >
+                      <Award className="w-3 h-3 text-white" />
                     </div>
-                  </motion.div>
-                </div>
+                    <h4 className="text-base font-semibold text-white">Key Achievements</h4>
+                  </div>
 
-                {/* Achievements */}
-                <div className={`mt-8 lg:mt-0 ${index % 2 === 1 ? "lg:col-start-1" : ""}`}>
-                  <motion.div whileHover={{ scale: 1.02, y: -5 }} className="glass-morphism rounded-2xl p-8 h-full">
-                    <h4 className="text-lg font-semibold text-white mb-6 flex items-center">
-                      <div className="w-2 h-2 chrome-gradient rounded-full mr-3" />
-                      Key Achievements
-                    </h4>
-                    <ul className="space-y-4">
-                      {exp.achievements.map((achievement, i) => (
-                        <motion.li
-                          key={i}
-                          initial={{ opacity: 0, x: -20 }}
-                          whileInView={{ opacity: 1, x: 0 }}
-                          transition={{ delay: i * 0.1 }}
-                          viewport={{ once: true }}
-                          className="flex items-start space-x-3"
-                        >
-                          <div className="w-1.5 h-1.5 chrome-gradient rounded-full mt-2 flex-shrink-0" />
-                          <span className="text-gray-300 leading-relaxed">{achievement}</span>
-                        </motion.li>
-                      ))}
-                    </ul>
-                  </motion.div>
+                  <div className="space-y-2">
+                    {exp.achievements.map((achievement, i) => (
+                      <motion.div
+                        key={i}
+                        initial={{ opacity: 0, x: -10 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ delay: i * 0.1 }}
+                        viewport={{ once: true }}
+                        className="flex items-start space-x-3 group hover:bg-gray-800/20 rounded-lg p-2 transition-all duration-200"
+                      >
+                        <div className="relative flex-shrink-0 mt-1.5">
+                          <div
+                            className={`w-2 h-2 bg-gradient-to-r ${exp.color} rounded-full group-hover:scale-125 transition-all duration-200`}
+                          />
+                          <div
+                            className={`absolute inset-0 w-2 h-2 bg-gradient-to-r ${exp.color} rounded-full opacity-0 group-hover:opacity-20 group-hover:scale-150 transition-all duration-300`}
+                          />
+                        </div>
+                        <div className="flex items-start space-x-2 flex-1">
+                          <TrendingUp className="w-3 h-3 text-green-400 mt-0.5 flex-shrink-0" />
+                          <span className="text-sm text-gray-300 leading-relaxed group-hover:text-white transition-colors">
+                            {achievement}
+                          </span>
+                        </div>
+                      </motion.div>
+                    ))}
+                  </div>
                 </div>
-              </motion.div>
-            ))}
-          </div>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
