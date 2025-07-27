@@ -41,12 +41,12 @@ const ContactSection = () => {
       icon: <Mail className="w-6 h-6" />,
       label: "Email",
       value: "mahi@abdulhakim.dev",
-      href: "mailto:mahi@abdulhakim.dev",
+      href: "mailto:mahiabdul20@gmail.com",
     },
     {
       icon: <Phone className="w-6 h-6" />,
       label: "Phone",
-      value: "+1 (555) 123-4567",
+      value: "+1 (612) 461-5157",
       href: "tel:+15551234567",
     },
     {
