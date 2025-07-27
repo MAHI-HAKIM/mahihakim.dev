@@ -17,13 +17,13 @@ const ProjectsSection = () => {
   const projects = [
     {
       id: 1,
-      title: "E-Commerce Platform",
+      title: "Siteflow",
       category: "web",
-      description: "Full-stack e-commerce solution with AI-powered recommendations and real-time inventory management.",
-      image: "/placeholder.svg?height=300&width=500",
+      description: "The complete construction management platform that streamlines projects, manages teams, tracks equipment, and provides AI-powered insights for modern construction businesses",
+      image: "/siteflow.png",
       technologies: ["Next.js", "TypeScript", "Stripe", "PostgreSQL"],
-      liveUrl: "#",
-      githubUrl: "#",
+      liveUrl: "https://siteflow.com",
+      githubUrl: "https://github.com/siteflow/siteflow",
       featured: true,
     },
     {
