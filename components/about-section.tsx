@@ -1,17 +1,17 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { Code, Palette, Zap, Users, Trophy, Lightbulb } from "lucide-react"
+import { Code, Palette, Zap, Users, Trophy, Lightbulb, User, Briefcase } from "lucide-react"
 
 const AboutSection = () => {
   const highlights = [
     {
       icon: Code,
-      text: "5+ years of full-stack development expertise",
+      text: "2+ years of full-stack development expertise",
     },
     {
       icon: Zap,
-      text: "AI automation specialist with proven results",
+      text: "AI automation developer with proven results",
     },
     {
       icon: Palette,
@@ -19,11 +19,11 @@ const AboutSection = () => {
     },
     {
       icon: Users,
-      text: "Team leader and mentor to junior developers",
+      text: "Content creator and social media manager",
     },
     {
       icon: Trophy,
-      text: "Delivered 50+ successful projects",
+      text: "Delivered 5+ successful projects",
     },
     {
       icon: Lightbulb,
@@ -32,10 +32,10 @@ const AboutSection = () => {
   ]
 
   const skills = [
-    { category: "Frontend", items: ["React", "Next.js", "TypeScript", "Tailwind CSS"] },
-    { category: "Backend", items: ["Node.js", "Python", "PostgreSQL", "MongoDB"] },
-    { category: "AI/Automation", items: ["OpenAI API", "n8n", "Zapier", "Custom APIs"] },
-    { category: "Tools", items: ["Git", "Docker", "AWS", "Vercel"] },
+    { category: "Frontend", items: ["React", "Next.js", "TypeScript", "Tailwind CSS" , "Framer Motion"] },
+    { category: "Backend", items: ["Node.js", "Python", "PostgreSQL", "MongoDB" , "Django" , "Express"] },
+    { category: "AI/Automation", items: ["OpenAI API", "n8n", "Make","Zappier", "Custom APIs"] },
+    { category: "Tools", items: ["Git", "Docker", "AWS", "Vercel" , "Figma" , "Azure Devops" , "Adobe"] },
   ]
 
   return (
@@ -65,20 +65,14 @@ const AboutSection = () => {
           >
             <div className="glass-morphism rounded-xl sm:rounded-2xl p-4 sm:p-6">
               <div className="flex items-center space-x-3 mb-3 sm:mb-4">
-                <div className="relative">
-                  {/* Outer glow ring */}
-                  <div className="absolute inset-0 w-5 h-5 sm:w-6 sm:h-6 bg-gradient-to-r from-blue-400/30 to-purple-400/30 rounded-full blur-sm animate-pulse" />
-                  {/* Main chrome gradient */}
-                  <div className="relative w-5 h-5 sm:w-6 sm:h-6 chrome-gradient rounded-full" />
-                  {/* Inner shine effect */}
-                  <div className="absolute inset-1 bg-gradient-to-br from-white/40 to-transparent rounded-full" />
-                  {/* Center highlight */}
-                  <div className="absolute inset-2 bg-white/20 rounded-full" />
-                </div>
-                <h3 className="text-base sm:text-lg font-semibold text-white">My Story</h3>
+               
+                <h3 className="text-base sm:text-lg font-semibold text-white flex items-center gap-2">
+                  <User className="w-4 h-4 text-gray-300" />
+                  My Story
+                </h3>
               </div>
               <p className="text-xs sm:text-sm text-gray-300 leading-relaxed mb-3 sm:mb-4">
-                I'm a passionate full-stack developer and AI automation specialist with over 5 years of experience
+                I'm a passionate full-stack developer and AI automation specialist with over 2 years of experience
                 creating innovative digital solutions. My journey spans from crafting elegant user interfaces to
                 building robust backend systems and implementing intelligent automation workflows.
               </p>
@@ -90,17 +84,11 @@ const AboutSection = () => {
 
             <div className="glass-morphism rounded-xl sm:rounded-2xl p-4 sm:p-6">
               <div className="flex items-center space-x-3 mb-3 sm:mb-4">
-                <div className="relative">
-                  {/* Outer glow ring */}
-                  <div className="absolute inset-0 w-5 h-5 sm:w-6 sm:h-6 bg-gradient-to-r from-emerald-400/30 to-cyan-400/30 rounded-full blur-sm animate-pulse" />
-                  {/* Main chrome gradient */}
-                  <div className="relative w-5 h-5 sm:w-6 sm:h-6 chrome-gradient rounded-full" />
-                  {/* Inner shine effect */}
-                  <div className="absolute inset-1 bg-gradient-to-br from-white/40 to-transparent rounded-full" />
-                  {/* Center highlight */}
-                  <div className="absolute inset-2 bg-white/20 rounded-full" />
-                </div>
-                <h3 className="text-base sm:text-lg font-semibold text-white">Key Highlights</h3>
+               
+                <h3 className="text-base sm:text-lg font-semibold text-white flex items-center gap-2">
+                  <Trophy className="w-4 h-4 text-gray-300" />
+                  Key Highlights
+                </h3>
               </div>
               <div className="grid gap-2 sm:gap-3">
                 {highlights.map((highlight, index) => (
@@ -162,17 +150,10 @@ const AboutSection = () => {
           >
             <div className="glass-morphism rounded-xl sm:rounded-2xl p-4 sm:p-6">
               <div className="flex items-center space-x-3 mb-3 sm:mb-4">
-                <div className="relative">
-                  {/* Outer glow ring */}
-                  <div className="absolute inset-0 w-5 h-5 sm:w-6 sm:h-6 bg-gradient-to-r from-orange-400/30 to-red-400/30 rounded-full blur-sm animate-pulse" />
-                  {/* Main chrome gradient */}
-                  <div className="relative w-5 h-5 sm:w-6 sm:h-6 chrome-gradient rounded-full" />
-                  {/* Inner shine effect */}
-                  <div className="absolute inset-1 bg-gradient-to-br from-white/40 to-transparent rounded-full" />
-                  {/* Center highlight */}
-                  <div className="absolute inset-2 bg-white/20 rounded-full" />
-                </div>
-                <h3 className="text-base sm:text-lg font-semibold text-white">Technical Skills</h3>
+                <h3 className="text-base sm:text-lg font-semibold text-white flex items-center gap-2">
+                  <Code className="w-4 h-4 text-gray-300" />
+                  Technical Skills
+                </h3>
               </div>
               <div className="grid gap-3 sm:gap-4">
                 {skills.map((skillGroup, index) => (
@@ -204,17 +185,10 @@ const AboutSection = () => {
 
             <div className="glass-morphism rounded-xl sm:rounded-2xl p-4 sm:p-6">
               <div className="flex items-center space-x-3 mb-3 sm:mb-4">
-                <div className="relative">
-                  {/* Outer glow ring */}
-                  <div className="absolute inset-0 w-5 h-5 sm:w-6 sm:h-6 bg-gradient-to-r from-green-400/30 to-teal-400/30 rounded-full blur-sm animate-pulse" />
-                  {/* Main chrome gradient */}
-                  <div className="relative w-5 h-5 sm:w-6 sm:h-6 chrome-gradient rounded-full" />
-                  {/* Inner shine effect */}
-                  <div className="absolute inset-1 bg-gradient-to-br from-white/40 to-transparent rounded-full" />
-                  {/* Center highlight */}
-                  <div className="absolute inset-2 bg-white/20 rounded-full" />
-                </div>
-                <h3 className="text-base sm:text-lg font-semibold text-white">What I Do</h3>
+              <h3 className="text-base sm:text-lg font-semibold text-white flex items-center gap-2">
+                  <Briefcase className="w-4 h-4 text-gray-300" />
+                  What I Do
+                </h3>
               </div>
               <div className="space-y-2 sm:space-y-3">
                 <div className="flex items-start space-x-2 sm:space-x-3">

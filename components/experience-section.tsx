@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, time } from "framer-motion"
 import { Calendar, MapPin, Award, TrendingUp } from "lucide-react"
 import Image from "next/image"
 
@@ -8,70 +8,72 @@ const ExperienceSection = () => {
   const experiences = [
     {
       id: 1,
-      company: "TechFlow Solutions",
-      position: "Senior Full-Stack Developer",
-      duration: "2022 - Present",
+      company: "Kitcenter",
+      position: "Software Engineer – Product Maintenance & Support Systems",
+      duration: "2025 - Present",
       location: "Remote",
       description:
-        "Leading development of enterprise-scale web applications using Next.js and Node.js. Implemented AI-powered features that increased user engagement by 40%.",
+        "Build and maintain a real-time customer support chat system, troubleshoot and improve existing products, optimize performance, and ensure stability of core platforms.",
       achievements: [
-        "Architected microservices handling 1M+ daily requests",
-        "Reduced application load time by 60% through optimization",
-        "Mentored 5 junior developers in modern React patterns",
+        "Developed a real-time customer support chat system.",
+        "Optimized performance and stability of core platforms",
+        "Troubleshoot and improve existing products",
       ],
-      technologies: ["Next.js", "TypeScript", "Node.js", "PostgreSQL", "AWS"],
-      logo: "/placeholder.svg?height=60&width=60&text=TF",
+      technologies: ["Next.js", "TypeScript", "Node.js", "MongoDB", "Socket.io"],
+      logo: "/kitcenter.png",
       color: "from-blue-500 to-cyan-500",
     },
     {
       id: 2,
-      company: "Digital Innovations Inc",
-      position: "AI Automation Specialist",
-      duration: "2021 - 2022",
-      location: "New York, NY",
+      company: "Haramaya University",
+      position: "Software Engineer Intern - Full Stack Development",
+      duration: "2024 - 2025",
+      location: " Hararghe, Ethiopia",
       description:
-        "Designed and implemented automated workflows using n8n and custom APIs. Created intelligent systems that streamlined business processes.",
+        "s an intern at Haramaya University's ICT Directorate, I contributed to the development of a Full-Stack Student Management System to streamline student records, enrollment, and academic tracking.",
       achievements: [
-        "Automated 15+ business processes saving 200+ hours/month",
+        "Engineered a Full-Stack Student Management System used by 5,000+ students, accelerating academic record retrieval time by 40% through optimized PostgreSQL queries.",
+        "Optimized backend processes and database queries with Node.js, Express, and PostgreSQL, significantly boosting performance and scalability.",
         "Built custom AI integrations with 99.9% uptime",
-        "Increased operational efficiency by 35%",
+        "Optimized performance and stability of core platforms",
       ],
-      technologies: ["n8n", "Python", "OpenAI API", "Zapier", "MongoDB"],
-      logo: "/placeholder.svg?height=60&width=60&text=DI",
+      technologies: ["Next.js", "TypeScript", "Node.js", "PostgreSQL", "AWS" , "Docker" , "Express" , "Pipeline" ],
+      logo: "/haramaya.png",
       color: "from-purple-500 to-pink-500",
     },
     {
       id: 3,
-      company: "Creative Media Studio",
-      position: "Full-Stack Developer & Content Creator",
-      duration: "2020 - 2021",
-      location: "Los Angeles, CA",
+      company: "Minaret Real Estate",
+      position: "Desktop App Developer",
+      duration: "2023 - 2024",
+      location: "Addis Ababa, Ethiopia",
       description:
-        "Developed custom CMS solutions for content creators while producing high-quality visual content for digital marketing campaigns.",
+        " I contributed to building a desktop application for Minaret Real Estate Company, designed to streamline employee, property, and room management",
       achievements: [
-        "Built custom CMS used by 50+ content creators",
-        "Produced 100+ marketing videos with 2M+ total views",
-        "Increased client social media engagement by 150%",
+        "Developed a desktop application for Minaret Real Estate Company, designed to streamline employee, property, and room management.",
+        "Optimized data management and retrieval with ASP.NET Core and SQL Server, improving efficiency and scalability.",
+        "Built a modern and intuitive UI with WinUI 3, enhancing user experience and workflow automation.",
+    
       ],
-      technologies: ["React", "Express.js", "Adobe Creative Suite", "Final Cut Pro"],
-      logo: "/placeholder.svg?height=60&width=60&text=CM",
+      technologies: ["ASP.NET Core", "SQL Server","C#" ,"Entity Framework" ,"WPF" , "WinUI 3"],
+      logo: "/minaret.png",
       color: "from-orange-500 to-red-500",
     },
     {
       id: 4,
-      company: "StartupLab",
-      position: "Junior Developer",
-      duration: "2019 - 2020",
-      location: "San Francisco, CA",
+      company: "Cinemagramic",
+      position: "Content Creator",
+      duration: "2023 - Present",
+      location: " DMV, USA",
       description:
-        "Contributed to various startup projects, focusing on rapid prototyping and MVP development using modern web technologies.",
+        "I am a content creator, videographer, and cinematographer passionate about crafting cinematic visuals and compelling storytelling.",
       achievements: [
-        "Delivered 8+ MVP projects within tight deadlines",
-        "Improved code quality through comprehensive testing",
-        "Collaborated with cross-functional teams of 10+ members",
+        "Created 10+ high-quality videos, including tutorials, product reviews, and cinematic content, reaching 100,000+ views on YouTube.",
+        "Developed a strong social media presence, growing my channel to 10,000+ subscribers and 100,000+ views on Instagram.",
+        "Collaborated with 5+ brands and influencers, expanding my network and increasing engagement.",
       ],
-      technologies: ["React", "Node.js", "MongoDB", "Firebase", "Figma"],
-      logo: "/placeholder.svg?height=60&width=60&text=SL",
+      technologies: ["Canva", "Capcut","Davinci Resolve" , "Adobe Photoshop", "Adobe After Effects", "Adobe Lightroom"],
+      logo: "/cinemagramic.jpg",
       color: "from-green-500 to-emerald-500",
     },
   ]
