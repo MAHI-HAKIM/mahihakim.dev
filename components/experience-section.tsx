@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { Calendar, MapPin, Award, TrendingUp } from "lucide-react"
+import Image from "next/image"
 
 const ExperienceSection = () => {
   const experiences = [
@@ -19,7 +20,7 @@ const ExperienceSection = () => {
         "Mentored 5 junior developers in modern React patterns",
       ],
       technologies: ["Next.js", "TypeScript", "Node.js", "PostgreSQL", "AWS"],
-      logo: "🚀",
+      logo: "/placeholder.svg?height=60&width=60&text=TF",
       color: "from-blue-500 to-cyan-500",
     },
     {
@@ -36,7 +37,7 @@ const ExperienceSection = () => {
         "Increased operational efficiency by 35%",
       ],
       technologies: ["n8n", "Python", "OpenAI API", "Zapier", "MongoDB"],
-      logo: "🤖",
+      logo: "/placeholder.svg?height=60&width=60&text=DI",
       color: "from-purple-500 to-pink-500",
     },
     {
@@ -53,8 +54,25 @@ const ExperienceSection = () => {
         "Increased client social media engagement by 150%",
       ],
       technologies: ["React", "Express.js", "Adobe Creative Suite", "Final Cut Pro"],
-      logo: "🎬",
+      logo: "/placeholder.svg?height=60&width=60&text=CM",
       color: "from-orange-500 to-red-500",
+    },
+    {
+      id: 4,
+      company: "StartupLab",
+      position: "Junior Developer",
+      duration: "2019 - 2020",
+      location: "San Francisco, CA",
+      description:
+        "Contributed to various startup projects, focusing on rapid prototyping and MVP development using modern web technologies.",
+      achievements: [
+        "Delivered 8+ MVP projects within tight deadlines",
+        "Improved code quality through comprehensive testing",
+        "Collaborated with cross-functional teams of 10+ members",
+      ],
+      technologies: ["React", "Node.js", "MongoDB", "Firebase", "Figma"],
+      logo: "/placeholder.svg?height=60&width=60&text=SL",
+      color: "from-green-500 to-emerald-500",
     },
   ]
 
@@ -74,21 +92,36 @@ const ExperienceSection = () => {
           </p>
         </motion.div>
 
-        <div className="space-y-8">
+        {/* Two-column grid layout */}
+        <div className="grid lg:grid-cols-2 gap-8">
           {experiences.map((exp, index) => (
             <motion.div
               key={exp.id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.1 }}
+              transition={{ duration: 0.6, delay: (index % 2) * 0.1 }}
               viewport={{ once: true }}
               className="glass-morphism rounded-2xl p-6 hover:bg-gray-800/30 transition-all duration-300"
             >
-              <div className="grid lg:grid-cols-2 gap-6">
-                {/* Left Side - Company Info */}
-                <div className="space-y-4">
-                  <div className="flex items-start space-x-4">
-                    <div className="text-3xl">{exp.logo}</div>
+              {/* Company Info Section */}
+              <div className="mb-6">
+                <div className="flex items-start justify-between mb-4">
+                  <div className="flex items-center space-x-4">
+                    {/* Company Logo */}
+                    <div className="relative group">
+                      <div
+                        className={`absolute inset-0 w-12 h-12 bg-gradient-to-r ${exp.color} rounded-full opacity-20 group-hover:opacity-30 transition-all duration-300`}
+                      />
+                      <div className="relative w-12 h-12 bg-gray-800 rounded-full border-2 border-gray-600 flex items-center justify-center overflow-hidden group-hover:border-gray-400 transition-all duration-300">
+                        <Image
+                          src={exp.logo || "/placeholder.svg"}
+                          alt={`${exp.company} logo`}
+                          width={32}
+                          height={32}
+                          className="rounded-full object-cover"
+                        />
+                      </div>
+                    </div>
                     <div className="flex-1">
                       <div className="flex items-center space-x-3 mb-2">
                         <h3 className="text-lg font-bold text-white">{exp.company}</h3>
@@ -107,59 +140,59 @@ const ExperienceSection = () => {
                       </div>
                     </div>
                   </div>
-
-                  <p className="text-sm text-gray-300 leading-relaxed">{exp.description}</p>
-
-                  <div className="flex flex-wrap gap-1.5">
-                    {exp.technologies.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-2 py-1 bg-gray-800/50 border border-gray-600/30 rounded-md text-xs text-gray-300"
-                      >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
                 </div>
 
-                {/* Right Side - Achievements */}
-                <div className="space-y-3">
-                  <div className="flex items-center space-x-2 mb-3">
-                    <div
-                      className={`w-5 h-5 bg-gradient-to-r ${exp.color} rounded-full flex items-center justify-center`}
-                    >
-                      <Award className="w-3 h-3 text-white" />
-                    </div>
-                    <h4 className="text-base font-semibold text-white">Key Achievements</h4>
-                  </div>
+                <p className="text-sm text-gray-300 leading-relaxed mb-4">{exp.description}</p>
 
-                  <div className="space-y-2">
-                    {exp.achievements.map((achievement, i) => (
-                      <motion.div
-                        key={i}
-                        initial={{ opacity: 0, x: -10 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        transition={{ delay: i * 0.1 }}
-                        viewport={{ once: true }}
-                        className="flex items-start space-x-3 group hover:bg-gray-800/20 rounded-lg p-2 transition-all duration-200"
-                      >
-                        <div className="relative flex-shrink-0 mt-1.5">
-                          <div
-                            className={`w-2 h-2 bg-gradient-to-r ${exp.color} rounded-full group-hover:scale-125 transition-all duration-200`}
-                          />
-                          <div
-                            className={`absolute inset-0 w-2 h-2 bg-gradient-to-r ${exp.color} rounded-full opacity-0 group-hover:opacity-20 group-hover:scale-150 transition-all duration-300`}
-                          />
-                        </div>
-                        <div className="flex items-start space-x-2 flex-1">
-                          <TrendingUp className="w-3 h-3 text-green-400 mt-0.5 flex-shrink-0" />
-                          <span className="text-sm text-gray-300 leading-relaxed group-hover:text-white transition-colors">
-                            {achievement}
-                          </span>
-                        </div>
-                      </motion.div>
-                    ))}
+                <div className="flex flex-wrap gap-1.5 mb-4">
+                  {exp.technologies.map((tech) => (
+                    <span
+                      key={tech}
+                      className="px-2 py-1 bg-gray-800/50 border border-gray-600/30 rounded-md text-xs text-gray-300"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              {/* Achievements Section */}
+              <div className="space-y-3">
+                <div className="flex items-center space-x-2 mb-3">
+                  <div
+                    className={`w-5 h-5 bg-gradient-to-r ${exp.color} rounded-full flex items-center justify-center`}
+                  >
+                    <Award className="w-3 h-3 text-white" />
                   </div>
+                  <h4 className="text-base font-semibold text-white">Key Achievements</h4>
+                </div>
+
+                <div className="space-y-2">
+                  {exp.achievements.map((achievement, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      transition={{ delay: i * 0.1 }}
+                      viewport={{ once: true }}
+                      className="flex items-start space-x-3 group hover:bg-gray-800/20 rounded-lg p-2 transition-all duration-200"
+                    >
+                      <div className="relative flex-shrink-0 mt-1.5">
+                        <div
+                          className={`w-2 h-2 bg-gradient-to-r ${exp.color} rounded-full group-hover:scale-125 transition-all duration-200`}
+                        />
+                        <div
+                          className={`absolute inset-0 w-2 h-2 bg-gradient-to-r ${exp.color} rounded-full opacity-0 group-hover:opacity-20 group-hover:scale-150 transition-all duration-300`}
+                        />
+                      </div>
+                      <div className="flex items-start space-x-2 flex-1">
+                        <TrendingUp className="w-3 h-3 text-green-400 mt-0.5 flex-shrink-0" />
+                        <span className="text-sm text-gray-300 leading-relaxed group-hover:text-white transition-colors">
+                          {achievement}
+                        </span>
+                      </div>
+                    </motion.div>
+                  ))}
                 </div>
               </div>
             </motion.div>
