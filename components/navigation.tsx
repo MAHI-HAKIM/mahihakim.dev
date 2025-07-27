@@ -47,36 +47,64 @@ const Navigation = () => {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId)
     if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
+      const navHeight = 80 // Account for navbar height
+      const elementPosition = element.offsetTop - navHeight
+      window.scrollTo({
+        top: elementPosition,
+        behavior: "smooth",
+      })
     }
     setIsOpen(false)
   }
 
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = () => {
+      if (isOpen) {
+        setIsOpen(false)
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener("click", handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener("click", handleClickOutside)
+    }
+  }, [isOpen])
+
   return (
-    <motion.nav 
-      initial={{ y: -100 }} 
-      animate={{ y: 0 }} 
+    <motion.nav
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled 
-          ? 'shadow-lg border-b border-gray-600/30 bg-gray-900/20 backdrop-blur-xl' 
-          : 'bg-gray-600/5 backdrop-blur-sm'
+        scrolled
+          ? "shadow-lg border-b border-gray-600/30 bg-gray-900/95 backdrop-blur-xl"
+          : "bg-gray-900/80 backdrop-blur-sm"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center py-4">
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-2xl font-bold flex items-center">
-            <Image 
-              src="/logo.png" 
-              alt="Mahi Hakim Logo" 
-              width={60} 
-              height={60} 
-              className="object-contain"
-              style={{ filter: 'brightness(0) invert(1) drop-shadow(0 0 0 transparent)' }}
+        <div className="flex justify-between items-center h-16 sm:h-20">
+          {/* Logo */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="flex items-center"
+            onClick={() => scrollToSection("home")}
+          >
+            <Image
+              src="/logo.png"
+              alt="Mahi Hakim Logo"
+              width={40}
+              height={40}
+              className="sm:w-[60px] sm:h-[60px] object-contain cursor-pointer"
+              style={{ filter: "brightness(0) invert(1) drop-shadow(0 0 0 transparent)" }}
             />
           </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
+          <div className="hidden md:flex space-x-6 lg:space-x-8">
             {navItems.map((item) => (
               <motion.button
                 key={item.id}
@@ -98,7 +126,10 @@ const Navigation = () => {
           {/* Mobile Menu Button */}
           <div className="md:hidden">
             <motion.button
-              onClick={() => setIsOpen(!isOpen)}
+              onClick={(e) => {
+                e.stopPropagation()
+                setIsOpen(!isOpen)
+              }}
               className="p-2 rounded-md text-gray-400 hover:text-white transition-colors"
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
@@ -115,22 +146,27 @@ const Navigation = () => {
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
-              className="md:hidden pb-4"
+              className="md:hidden border-t border-gray-600/30 bg-gray-900/95 backdrop-blur-xl"
+              onClick={(e) => e.stopPropagation()}
             >
-              {navItems.map((item, index) => (
-                <motion.button
-                  key={item.id}
-                  onClick={() => scrollToSection(item.id)}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  className={`block w-full text-left px-3 py-2 text-base font-medium transition-colors duration-200 ${
-                    activeSection === item.id ? "text-white" : "text-gray-400 hover:text-white"
-                  }`}
-                >
-                  {item.label}
-                </motion.button>
-              ))}
+              <div className="py-4 space-y-1">
+                {navItems.map((item, index) => (
+                  <motion.button
+                    key={item.id}
+                    onClick={() => scrollToSection(item.id)}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: index * 0.1 }}
+                    className={`block w-full text-left px-4 py-3 text-base font-medium transition-colors duration-200 ${
+                      activeSection === item.id
+                        ? "text-white bg-gray-800/50"
+                        : "text-gray-400 hover:text-white hover:bg-gray-800/30"
+                    }`}
+                  >
+                    {item.label}
+                  </motion.button>
+                ))}
+              </div>
             </motion.div>
           )}
         </AnimatePresence>
