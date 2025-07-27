@@ -3,10 +3,12 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X } from "lucide-react"
+import Image from "next/image"
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [activeSection, setActiveSection] = useState("home")
+  const [scrolled, setScrolled] = useState(false)
 
   const navItems = [
     { id: "home", label: "Home" },
@@ -29,6 +31,13 @@ const Navigation = () => {
           break
         }
       }
+
+      // Check if scrolled down
+      if (window.scrollY > 20) {
+        setScrolled(true)
+      } else {
+        setScrolled(false)
+      }
     }
 
     window.addEventListener("scroll", handleScroll)
@@ -44,11 +53,26 @@ const Navigation = () => {
   }
 
   return (
-    <motion.nav initial={{ y: -100 }} animate={{ y: 0 }} className="fixed top-0 left-0 right-0 z-50 glass-morphism">
+    <motion.nav 
+      initial={{ y: -100 }} 
+      animate={{ y: 0 }} 
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled 
+          ? 'shadow-lg border-b border-gray-600/30 bg-gray-900/20 backdrop-blur-xl' 
+          : 'bg-gray-600/5 backdrop-blur-sm'
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-2xl font-bold text-gradient">
-            Mahi Abdulhakim
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-2xl font-bold flex items-center">
+            <Image 
+              src="/logo.png" 
+              alt="Mahi Hakim Logo" 
+              width={60} 
+              height={60} 
+              className="object-contain"
+              style={{ filter: 'brightness(0) invert(1) drop-shadow(0 0 0 transparent)' }}
+            />
           </motion.div>
 
           {/* Desktop Navigation */}
