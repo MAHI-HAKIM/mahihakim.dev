@@ -58,10 +58,10 @@ const ContactSection = () => {
   ]
 
   const socialLinks = [
-    { icon: <Github className="w-5 h-5" />, label: "GitHub", href: "#", color: "hover:text-gray-300" },
-    { icon: <Linkedin className="w-5 h-5" />, label: "LinkedIn", href: "#", color: "hover:text-blue-400" },
-    { icon: <Twitter className="w-5 h-5" />, label: "Twitter", href: "#", color: "hover:text-blue-400" },
-    { icon: <Instagram className="w-5 h-5" />, label: "Instagram", href: "#", color: "hover:text-pink-400" },
+    { icon: <Github className="w-5 h-5" />, label: "GitHub", href: "https://github.com/Mahi-Hakim", color: "hover:text-gray-300" },
+    { icon: <Linkedin className="w-5 h-5" />, label: "LinkedIn", href: "https://www.linkedin.com/in/mahi-mohammed-53b4b9251/", color: "hover:text-blue-400" },
+    { icon: <Twitter className="w-5 h-5" />, label: "Twitter", href: "https://x.com/Mahi_Hakim_", color: "hover:text-blue-400" },
+    { icon: <Instagram className="w-5 h-5" />, label: "Instagram", href: "https://www.instagram.com/cinemagramic", color: "hover:text-pink-400" },
   ]
 
   return (
