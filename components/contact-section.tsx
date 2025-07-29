@@ -5,6 +5,7 @@ import type React from "react"
 import { motion } from "framer-motion"
 import { useState } from "react"
 import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, Instagram } from "lucide-react"
+import Toast from "./ui/toast"
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
@@ -14,26 +15,65 @@ const ContactSection = () => {
     message: "",
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [toast, setToast] = useState<{
+    message: string
+    type: "success" | "error"
+    isVisible: boolean
+  }>({
+    message: "",
+    type: "success",
+    isVisible: false,
+  })
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 2000))
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      })
 
-    setIsSubmitting(false)
-    setFormData({ name: "", email: "", subject: "", message: "" })
+      const result = await response.json()
 
-    // You would integrate with your preferred form handling service here
-    alert("Message sent successfully!")
+      if (response.ok) {
+        setToast({
+          message: "Message sent successfully! I'll get back to you soon.",
+          type: "success",
+          isVisible: true,
+        })
+        setFormData({ name: "", email: "", subject: "", message: "" })
+      } else {
+        setToast({
+          message: result.error || "Failed to send message. Please try again.",
+          type: "error",
+          isVisible: true,
+        })
+      }
+    } catch (error) {
+      setToast({
+        message: "Network error. Please check your connection and try again.",
+        type: "error",
+        isVisible: true,
+      })
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFormData((prev) => ({
+    setFormData((prev: typeof formData) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }))
+  }
+
+  const closeToast = () => {
+    setToast((prev) => ({ ...prev, isVisible: false }))
   }
 
   const contactInfo = [
@@ -41,13 +81,13 @@ const ContactSection = () => {
       icon: <Mail className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
       label: "Email",
       value: "mahi@abdulhakim.dev",
-      href: "mailto:mahi@abdulhakim.dev",
+      href: "mailto:mahiabdul20@gmail.com",
     },
     {
       icon: <Phone className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
       label: "Phone",
-      value: "+1 (555) 123-4567",
-      href: "tel:+15551234567",
+      value: "+1 (612) 461-5157",
+      href: "tel:+1 (612) 461-5157",
     },
     {
       icon: <MapPin className="w-4 h-4 sm:w-5 sm:h-5 lg:w-6 lg:h-6" />,
@@ -91,10 +131,6 @@ const ContactSection = () => {
     visible: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.6,
-        ease: "easeOut",
-      },
     },
   }
 
@@ -103,10 +139,6 @@ const ContactSection = () => {
     visible: {
       opacity: 1,
       scale: 1,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut",
-      },
     },
   }
 
@@ -122,12 +154,14 @@ const ContactSection = () => {
         >
           <motion.h2
             variants={itemVariants}
+            transition={{ duration: 0.6, ease: "easeOut" }}
             className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gradient mb-4 sm:mb-6"
           >
             Let's Connect
           </motion.h2>
           <motion.p
             variants={itemVariants}
+            transition={{ duration: 0.6, ease: "easeOut" }}
             className="text-sm sm:text-base lg:text-lg text-gray-300 max-w-3xl mx-auto leading-relaxed px-4"
           >
             Ready to bring your ideas to life? Let's discuss how we can create something extraordinary together.
@@ -141,15 +175,16 @@ const ContactSection = () => {
             whileInView="visible"
             viewport={{ once: true, margin: "-50px" }}
             variants={cardVariants}
+            transition={{ duration: 0.5, ease: "easeOut" }}
             className="glass-morphism rounded-xl sm:rounded-2xl p-6 sm:p-8 order-2 lg:order-1"
           >
-            <motion.h3 variants={itemVariants} className="text-xl sm:text-2xl font-bold text-white mb-6">
+            <motion.h3 variants={itemVariants} transition={{ duration: 0.6, ease: "easeOut" }} className="text-xl sm:text-2xl font-bold text-white mb-6">
               Send a Message
             </motion.h3>
 
             <motion.form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6" variants={containerVariants}>
               <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
-                <motion.div variants={itemVariants}>
+                <motion.div variants={itemVariants} transition={{ duration: 0.6, ease: "easeOut" }}>
                   <label htmlFor="name" className="block text-xs sm:text-sm font-medium text-gray-300 mb-2">
                     Name
                   </label>
@@ -165,7 +200,7 @@ const ContactSection = () => {
                   />
                 </motion.div>
 
-                <motion.div variants={itemVariants}>
+                <motion.div variants={itemVariants} transition={{ duration: 0.6, ease: "easeOut" }}>
                   <label htmlFor="email" className="block text-xs sm:text-sm font-medium text-gray-300 mb-2">
                     Email
                   </label>
@@ -182,7 +217,7 @@ const ContactSection = () => {
                 </motion.div>
               </div>
 
-              <motion.div variants={itemVariants}>
+              <motion.div variants={itemVariants} transition={{ duration: 0.6, ease: "easeOut" }}>
                 <label htmlFor="subject" className="block text-xs sm:text-sm font-medium text-gray-300 mb-2">
                   Subject
                 </label>
@@ -198,7 +233,7 @@ const ContactSection = () => {
                 />
               </motion.div>
 
-              <motion.div variants={itemVariants}>
+              <motion.div variants={itemVariants} transition={{ duration: 0.6, ease: "easeOut" }}>
                 <label htmlFor="message" className="block text-xs sm:text-sm font-medium text-gray-300 mb-2">
                   Message
                 </label>
@@ -218,12 +253,16 @@ const ContactSection = () => {
                 type="submit"
                 disabled={isSubmitting}
                 variants={itemVariants}
+                transition={{ duration: 0.6, ease: "easeOut" }}
                 whileHover={{ scale: 1.02, y: -2 }}
                 whileTap={{ scale: 0.98 }}
                 className="w-full flex items-center justify-center space-x-2 px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-gray-200 to-white text-black font-semibold rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-white/10 disabled:opacity-50 disabled:cursor-not-allowed text-sm sm:text-base"
               >
                 {isSubmitting ? (
-                  <div className="w-4 h-4 sm:w-5 sm:h-5 border-2 border-black border-t-transparent rounded-full animate-spin" />
+                  <>
+                    <div className="w-4 h-4 sm:w-5 sm:h-5 border-2 border-black border-t-transparent rounded-full animate-spin" />
+                    <span>Sending...</span>
+                  </>
                 ) : (
                   <>
                     <Send className="w-4 h-4 sm:w-5 sm:h-5" />
@@ -243,8 +282,8 @@ const ContactSection = () => {
             className="space-y-6 sm:space-y-8 order-1 lg:order-2"
           >
             {/* Contact Details */}
-            <motion.div variants={cardVariants} className="glass-morphism rounded-xl sm:rounded-2xl p-6 sm:p-8">
-              <motion.h3 variants={itemVariants} className="text-xl sm:text-2xl font-bold text-white mb-6">
+            <motion.div variants={cardVariants} transition={{ duration: 0.5, ease: "easeOut" }} className="glass-morphism rounded-xl sm:rounded-2xl p-6 sm:p-8">
+              <motion.h3 variants={itemVariants} transition={{ duration: 0.6, ease: "easeOut" }} className="text-xl sm:text-2xl font-bold text-white mb-6">
                 Get in Touch
               </motion.h3>
 
@@ -253,6 +292,7 @@ const ContactSection = () => {
                   <motion.div
                     key={info.label}
                     variants={itemVariants}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
                     whileHover={{ x: 5, transition: { duration: 0.2 } }}
                     className="flex items-center space-x-3 sm:space-x-4 group cursor-pointer"
                   >
@@ -282,8 +322,8 @@ const ContactSection = () => {
             </motion.div>
 
             {/* Social Links */}
-            <motion.div variants={cardVariants} className="glass-morphism rounded-xl sm:rounded-2xl p-6 sm:p-8">
-              <motion.h3 variants={itemVariants} className="text-lg sm:text-xl font-bold text-white mb-6">
+            <motion.div variants={cardVariants} transition={{ duration: 0.5, ease: "easeOut" }} className="glass-morphism rounded-xl sm:rounded-2xl p-6 sm:p-8">
+              <motion.h3 variants={itemVariants} transition={{ duration: 0.6, ease: "easeOut" }} className="text-lg sm:text-xl font-bold text-white mb-6">
                 Follow My Work
               </motion.h3>
 
@@ -293,6 +333,7 @@ const ContactSection = () => {
                     key={social.label}
                     href={social.href}
                     variants={itemVariants}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
                     whileHover={{ scale: 1.05, y: -2 }}
                     whileTap={{ scale: 0.95 }}
                     className={`flex items-center space-x-3 p-3 sm:p-4 bg-gray-800/30 rounded-lg text-gray-400 ${social.color} transition-all duration-300 hover:bg-gray-700/30 hover:shadow-lg`}
@@ -307,9 +348,10 @@ const ContactSection = () => {
             {/* Availability Status */}
             <motion.div
               variants={cardVariants}
+              transition={{ duration: 0.5, ease: "easeOut" }}
               className="glass-morphism rounded-xl sm:rounded-2xl p-6 sm:p-8 text-center"
             >
-              <motion.div variants={itemVariants} className="flex items-center justify-center space-x-2 mb-4">
+              <motion.div variants={itemVariants} transition={{ duration: 0.6, ease: "easeOut" }} className="flex items-center justify-center space-x-2 mb-4">
                 <motion.div
                   className="w-2 h-2 sm:w-3 sm:h-3 bg-green-400 rounded-full"
                   animate={{ scale: [1, 1.2, 1] }}
@@ -317,13 +359,21 @@ const ContactSection = () => {
                 />
                 <span className="text-green-400 font-medium text-sm sm:text-base">Available for Projects</span>
               </motion.div>
-              <motion.p variants={itemVariants} className="text-gray-300 text-xs sm:text-sm leading-relaxed">
+              <motion.p variants={itemVariants} transition={{ duration: 0.6, ease: "easeOut" }} className="text-gray-300 text-xs sm:text-sm leading-relaxed">
                 Currently accepting new projects and collaborations. Let's create something amazing together!
               </motion.p>
             </motion.div>
           </motion.div>
         </div>
       </div>
+
+      {/* Toast Notification */}
+      <Toast
+        message={toast.message}
+        type={toast.type}
+        isVisible={toast.isVisible}
+        onClose={closeToast}
+      />
     </section>
   )
 }
