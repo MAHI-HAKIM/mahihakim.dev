@@ -12,6 +12,8 @@ This contact form uses Resend to send emails directly to your inbox (mahiabdul20
 4. Copy the API key
 
 ### 2. Environment Variables
+
+#### For Local Development:
 Create a `.env.local` file in your project root and add:
 
 ```env
@@ -19,6 +21,17 @@ RESEND_API_KEY=your_resend_api_key_here
 ```
 
 Replace `your_resend_api_key_here` with your actual Resend API key.
+
+#### For Vercel Deployment:
+1. Go to your Vercel dashboard
+2. Select your project
+3. Go to Settings → Environment Variables
+4. Add a new variable:
+   - **Name**: `RESEND_API_KEY`
+   - **Value**: Your actual Resend API key
+   - **Environment**: Production, Preview, and Development
+5. Click "Save"
+6. Redeploy your project
 
 ### 3. Domain Setup (Optional but Recommended)
 For production, you should verify your domain with Resend:
@@ -49,6 +62,8 @@ For production, you should verify your domain with Resend:
 1. **"Failed to send email"**: Check your Resend API key
 2. **"Network error"**: Check your internet connection
 3. **Emails not received**: Check spam folder or Resend dashboard
+4. **Build error on Vercel**: Make sure `RESEND_API_KEY` is set in Vercel environment variables
+5. **"Missing API key" error**: The API key is not properly configured in your deployment environment
 
 ### Resend Limits:
 - Free tier: 3,000 emails/month
