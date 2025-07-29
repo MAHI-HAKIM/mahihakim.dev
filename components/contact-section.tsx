@@ -109,7 +109,7 @@ const ContactSection = () => {
     {
       icon: <Instagram className="w-4 h-4 sm:w-5 sm:h-5" />,
       label: "Instagram",
-      href: "https://www.instagram.com/cinemagramic",
+      href: "https://www.instagram.com/cinemagramic/",
       color: "hover:text-pink-400",
     },
   ]
