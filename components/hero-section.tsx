@@ -34,6 +34,19 @@ const HeroSection = () => {
     }
   }
 
+  const handleDownloadResume = () => {
+    // Create a link element
+    const link = document.createElement('a')
+    link.href = '/Mahi_CV_US.pdf'
+    link.download = 'Mahi_Abdulhakim_Resume.pdf'
+    link.target = '_blank'
+    
+    // Append to body, click, and remove
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
+
   // Pearl-like particles with random movement
   const particles = [
     { size: 20, opacity: 0.6, duration: 25, baseX: 10, baseY: 20, delay: 0 },
@@ -167,6 +180,7 @@ const HeroSection = () => {
               </motion.button>
 
               <motion.button
+                onClick={handleDownloadResume}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="px-6 sm:px-8 py-3 sm:py-4 border-2 border-gray-400 text-gray-300 font-semibold rounded-full hover:border-white hover:text-white transition-all duration-300 text-sm sm:text-base"
