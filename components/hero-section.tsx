@@ -230,7 +230,7 @@ const HeroSection = () => {
                      animate={{ opacity: 1, scale: 1 }}
                      className="text-xs text-gray-400 bg-gray-800/50 px-2 py-1 rounded-full"
                    >
-                                           {downloadCount + 10} download{downloadCount !== 1 ? 's' : ''}
+                     {downloadCount} download{downloadCount !== 1 ? 's' : ''}
                    </motion.div>
                  )}
                </div>
