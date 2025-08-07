@@ -6,6 +6,7 @@ import { useEffect, useState } from "react"
 
 const HeroSection = () => {
   const [windowSize, setWindowSize] = useState({ width: 1200, height: 800 })
+  const [downloadCount, setDownloadCount] = useState(0)
 
   useEffect(() => {
     // Set initial window size
@@ -16,6 +17,21 @@ const HeroSection = () => {
     }
 
     window.addEventListener("resize", handleResize)
+
+    // Load download count on component mount
+    const loadDownloadCount = async () => {
+      try {
+        const response = await fetch('/api/download-track')
+        const data = await response.json()
+        if (data.success) {
+          setDownloadCount(data.downloadCount)
+        }
+      } catch (error) {
+        console.error('Error loading download count:', error)
+      }
+    }
+
+    loadDownloadCount()
 
     return () => {
       window.removeEventListener("resize", handleResize)
@@ -34,10 +50,30 @@ const HeroSection = () => {
     }
   }
 
-  const handleDownloadResume = () => {
-    // Create a link element
+  const handleDownloadResume = async () => {
+    try {
+      // Track the download first
+      const response = await fetch('/api/download-track', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      
+      const data = await response.json()
+      if (data.success) {
+        setDownloadCount(data.downloadCount)
+        console.log('Download tracked successfully:', data.downloadRecord)
+      } else {
+        console.error('Failed to track download:', data.error)
+      }
+    } catch (error) {
+      console.error('Error tracking download:', error)
+    }
+
+    // Create a link element for the actual download
     const link = document.createElement('a')
-    link.href = '/Mahi_CV_US.pdf'
+    link.href = '/Mahi_CV.pdf'
     link.download = 'Mahi_Abdulhakim_Resume.pdf'
     link.target = '_blank'
     
@@ -164,30 +200,41 @@ const HeroSection = () => {
               narratives. Transforming ideas into reality through code and creativity.
             </motion.p>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8, duration: 0.8 }}
-              className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start"
-            >
-              <motion.button
-                onClick={() => scrollToNext()}
-                whileHover={{ scale: 1.05, boxShadow: "0 10px 30px rgba(255, 255, 255, 0.1)" }}
-                whileTap={{ scale: 0.95 }}
-                className="px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-gray-200 to-white text-black font-semibold rounded-full transition-all duration-300 hover:shadow-lg text-sm sm:text-base"
-              >
-                Explore My Work
-              </motion.button>
+                         <motion.div
+               initial={{ opacity: 0, y: 20 }}
+               animate={{ opacity: 1, y: 0 }}
+               transition={{ delay: 0.8, duration: 0.8 }}
+               className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start items-start"
+             >
+               <motion.button
+                 onClick={() => scrollToNext()}
+                 whileHover={{ scale: 1.05 }}
+                 whileTap={{ scale: 0.95 }}
+                 className="px-6 sm:px-8 py-3 sm:py-4 border-2 border-gray-400 text-gray-300 font-semibold rounded-full hover:border-gray-500 hover:text-black hover:bg-white transition-all duration-300 text-sm sm:text-base"
+               >
+                 Explore My Work
+               </motion.button>
 
-              <motion.button
-                onClick={handleDownloadResume}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-6 sm:px-8 py-3 sm:py-4 border-2 border-gray-400 text-gray-300 font-semibold rounded-full hover:border-white hover:text-white transition-all duration-300 text-sm sm:text-base"
-              >
-                Download Resume
-              </motion.button>
-            </motion.div>
+               <div className="flex flex-col items-center gap-1">
+                 <motion.button
+                   onClick={handleDownloadResume}
+                   whileHover={{ scale: 1.05 }}
+                   whileTap={{ scale: 0.95 }}
+                   className="px-6 sm:px-8 py-3 sm:py-4 border-2 border-gray-400 text-gray-300 font-semibold rounded-full hover:border-800 hover:bg-green-100 hover:text-green-800 transition-all duration-300 text-sm sm:text-base"
+                 >
+                   Download Resume
+                 </motion.button>
+                 {downloadCount > 0 && (
+                   <motion.div
+                     initial={{ opacity: 0, scale: 0.8 }}
+                     animate={{ opacity: 1, scale: 1 }}
+                     className="text-xs text-gray-400 bg-gray-800/50 px-2 py-1 rounded-full"
+                   >
+                     {downloadCount + 10} download{downloadCount !== 1 ? 's' : ''}
+                   </motion.div>
+                 )}
+               </div>
+             </motion.div>
           </motion.div>
 
           {/* Right side - Enhanced character with 3D lighting from behind */}

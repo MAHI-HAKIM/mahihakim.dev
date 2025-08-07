@@ -14,6 +14,8 @@ const ProjectsSection = () => {
     { id: "all", label: "All Projects" },
     { id: "web", label: "Web Development" },
     { id: "ai", label: "AI Automation" },
+    { id: "web3", label: "Web3 Development" },
+    { id: "Cloud and Cybersecurity", label: "Cloud and Cybersecurity" },
     { id: "visual", label: "Visual Content" },
   ]
 
@@ -31,17 +33,28 @@ const ProjectsSection = () => {
       featured: true,
     },
     {
-      id: 2,
-      title: "Bunagram Message App",
-      category: "web",
+      id: 5,
+      title: "Content Creation Pipeline",
+      category: "ai",
       description:
-        "a real-time messaging application built using Socket.IO for WebSocket-based communication. The application enables users to send and receive messages instantly, whether in direct chats, group chats, or through broadcast messages.",
-      image: "/bunagram.png",
-      technologies: ["n8n", "OpenAI API", "Python", "MongoDB", "FastAPI", "Docker"],
-      liveUrl: "",
-      githubUrl: "https://github.com/MAHI-HAKIM/Bunagram",
+        "Automated content generation and publishing system for social media platforms with AI-driven optimization.",
+      image: "/aicontentcreation.png",
+      technologies: ["Python", "OpenAI API", "Social Media APIs", "Scheduler", "n8n", "Veo3"],
+      liveUrl: "https://www.tiktok.com/@ishowedai",
+      githubUrl: "",
       videoUrl: "",
-      featured: true,
+      featured: false,
+    },
+    {
+      id:9,
+      title: "Cloud Hardening Platform",
+      category: "Cloud and Cybersecurity",
+      description:
+        "Cloud Hardening Platform that automates the process of hardening cloud resources to meet security and CISO compliance requirements.",
+      image: "/cloudhardening.jpg",
+      technologies: ["React", "Ansible", "Cisco Security playbooks", "AWS SDK", "Digital Ocean API"],
+      liveUrl: "",
+      githubUrl: "https://github.com/MAHI-HAKIM/Cloud_Hardening_Platform",
     },
     {
       id: 3,
@@ -57,6 +70,19 @@ const ProjectsSection = () => {
       featured: false,
     },
     {
+      id: 2,
+      title: "Bunagram Message App",
+      category: "web3",
+      description:
+        "a real-time messaging application built using Socket.IO for WebSocket-based communication. The application enables users to send and receive messages instantly, whether in direct chats, group chats, or through broadcast messages.",
+      image: "/bunagram.png",
+      technologies: ["n8n", "OpenAI API", "Python", "MongoDB", "FastAPI", "Docker"],
+      liveUrl: "",
+      githubUrl: "https://github.com/MAHI-HAKIM/Bunagram",
+      videoUrl: "",
+      featured: true,
+    },
+    {
       id: 4,
       title: "Simons Game",
       category: "web",
@@ -68,6 +94,20 @@ const ProjectsSection = () => {
       githubUrl: "https://github.com/MAHI-HAKIM/Simons-Game-v0.0.1",
       videoUrl: "",
       featured: true,
+    },
+    
+    {
+      id: 6,
+      title: "Visionary Photography Series",
+      category: "visual",
+      description:
+        "Offer insights into the art, craft, and philosophy of capturing moments. From emphasizing the subtle reality a photograph can reveal to highlighting the importance of human connection, quotes offer a glimpse into the photographer's mindset and the power of images. Some popular quotes focus on the technical aspects, like the relationship between light and time, while others delve into the emotional impact of a photograph. ",
+      image: "/cinemagramic.png",
+      technologies: ["Professional Photography", "Lightroom", "Photoshop", "Capture One", "Studio Lighting"],
+      liveUrl: "https://www.instagram.com/cinemagramic/",
+      githubUrl: "",
+      videoUrl: "",
+      featured: false,
     },
     {
       id: 7,
@@ -81,33 +121,6 @@ const ProjectsSection = () => {
       githubUrl: "https://github.com/MAHI-HAKIM/Family-Travel-Tracker",
       videoUrl: "",
       featured: true,
-    },
-    
-    {
-      id: 5,
-      title: "Content Creation Pipeline",
-      category: "ai",
-      description:
-        "Automated content generation and publishing system for social media platforms with AI-driven optimization.",
-      image: "/aicontentcreation.png",
-      technologies: ["Python", "OpenAI API", "Social Media APIs", "Scheduler", "n8n", "Veo3"],
-      liveUrl: "https://www.tiktok.com/@ishowedai",
-      githubUrl: "",
-      videoUrl: "",
-      featured: false,
-    },
-    {
-      id: 6,
-      title: "Visionary Photography Series",
-      category: "visual",
-      description:
-        "Offer insights into the art, craft, and philosophy of capturing moments. From emphasizing the subtle reality a photograph can reveal to highlighting the importance of human connection, quotes offer a glimpse into the photographer's mindset and the power of images. Some popular quotes focus on the technical aspects, like the relationship between light and time, while others delve into the emotional impact of a photograph. ",
-      image: "/cinemagramic.png",
-      technologies: ["Professional Photography", "Lightroom", "Photoshop", "Capture One", "Studio Lighting"],
-      liveUrl: "https://www.instagram.com/cinemagramic/",
-      githubUrl: "",
-      videoUrl: "",
-      featured: false,
     },
     {
       id: 8,
@@ -141,7 +154,16 @@ const ProjectsSection = () => {
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page)
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    // Scroll to the projects section instead of top of page
+    const projectsSection = document.getElementById("projects")
+    if (projectsSection) {
+      const navHeight = 80 // Account for navbar height
+      const elementPosition = projectsSection.offsetTop - navHeight
+      window.scrollTo({
+        top: elementPosition,
+        behavior: 'smooth',
+      })
+    }
   }
 
   return (
@@ -214,6 +236,8 @@ const ProjectsSection = () => {
                   {project.liveUrl && (
                     <motion.a
                       href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
                       className="p-3 bg-white/20 backdrop-blur-sm rounded-full text-white hover:bg-white/30 transition-colors"
@@ -224,6 +248,8 @@ const ProjectsSection = () => {
                   {project.githubUrl && (
                     <motion.a
                       href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
                       className="p-3 bg-white/20 backdrop-blur-sm rounded-full text-white hover:bg-white/30 transition-colors"
@@ -234,6 +260,8 @@ const ProjectsSection = () => {
                   {project.videoUrl && (
                     <motion.a
                       href={project.videoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
                       className="p-3 bg-white/20 backdrop-blur-sm rounded-full text-white hover:bg-white/30 transition-colors"
