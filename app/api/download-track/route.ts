@@ -191,6 +191,9 @@ export async function POST(request: NextRequest) {
       )
     }
 
+    // Ensure connection is established
+    await prisma.$connect()
+
     // Initialize database if needed
     await initializeDatabase()
     
@@ -289,6 +292,9 @@ export async function POST(request: NextRequest) {
       { success: false, error: 'Failed to track download' },
       { status: 500 }
     )
+  } finally {
+    // Always disconnect to prevent connection issues
+    await prisma.$disconnect()
   }
 }
 
@@ -302,6 +308,9 @@ export async function GET() {
         { status: 500 }
       )
     }
+
+    // Ensure connection is established
+    await prisma.$connect()
 
     // Initialize database if needed
     await initializeDatabase()
@@ -347,5 +356,8 @@ export async function GET() {
       { success: false, error: 'Failed to read stats' },
       { status: 500 }
     )
+  } finally {
+    // Always disconnect to prevent connection issues
+    await prisma.$disconnect()
   }
 } 
