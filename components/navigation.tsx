@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Menu, X } from "lucide-react"
 import Image from "next/image"
+import Link from "next/link"
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -87,6 +88,7 @@ const Navigation = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16 sm:h-20">
           {/* Logo */}
+          <Link href="/">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -102,7 +104,7 @@ const Navigation = () => {
               style={{ filter: "brightness(0) invert(1) drop-shadow(0 0 0 transparent)" }}
             />
           </motion.div>
-
+          </Link>
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-6 lg:space-x-8">
             {navItems.map((item) => (

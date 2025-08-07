@@ -1,47 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-
-// Define types for better type safety
-interface DownloadRecord {
-  id: number
-  timestamp: string
-  ip: string
-  country: string
-  os: string
-  browser: string
-  deviceType: string
-  userAgent: string
-}
-
-interface Analytics {
-  countries: Record<string, number>
-  operatingSystems: Record<string, number>
-  browsers: Record<string, number>
-  deviceTypes: Record<string, number>
-  hourlyDistribution: Record<string, number>
-  dailyDistribution: Record<string, number>
-}
-
-interface DownloadStats {
-  resumeDownloads: number
-  lastUpdated: string
-  downloads: DownloadRecord[]
-  analytics: Analytics
-}
-
-// In-memory store for production (will reset on server restart, but works for demo)
-let downloadStats: DownloadStats = {
-  resumeDownloads: 0,
-  lastUpdated: new Date().toISOString(),
-  downloads: [],
-  analytics: {
-    countries: {},
-    operatingSystems: {},
-    browsers: {},
-    deviceTypes: {},
-    hourlyDistribution: {},
-    dailyDistribution: {}
-  }
-}
+import { prisma } from '@/lib/prisma'
 
 // Helper function to get client IP
 function getClientIP(request: NextRequest): string {
@@ -115,64 +73,117 @@ async function getCountryFromIP(ip: string): Promise<string> {
   }
 }
 
-// Initialize stats with some demo data for production
-function initializeDemoStats() {
-  if (downloadStats.downloads.length === 0) {
-    // Add some demo data to make it look more realistic
-    const demoDownloads = [
-      {
-        id: 1,
-        timestamp: new Date(Date.now() - 86400000).toISOString(), // 1 day ago
-        ip: '192.168.1.1',
-        country: 'United States',
-        os: 'Windows',
-        browser: 'Chrome',
-        deviceType: 'Desktop',
-        userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
-      },
-      {
-        id: 2,
-        timestamp: new Date(Date.now() - 172800000).toISOString(), // 2 days ago
-        ip: '192.168.1.2',
-        country: 'Canada',
-        os: 'macOS',
-        browser: 'Safari',
-        deviceType: 'Desktop',
-        userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36'
-      },
-      {
-        id: 3,
-        timestamp: new Date(Date.now() - 259200000).toISOString(), // 3 days ago
-        ip: '192.168.1.3',
-        country: 'United Kingdom',
-        os: 'Windows',
-        browser: 'Firefox',
-        deviceType: 'Desktop',
-        userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101'
+// Helper function to initialize database with demo data if empty
+async function initializeDatabase() {
+  try {
+    // Check if we have any download stats
+    const stats = await prisma.downloadStats.findFirst()
+    
+    if (!stats) {
+      // Initialize with demo data
+      const demoDownloads = [
+        {
+          ip: '192.168.1.1',
+          country: 'United States',
+          os: 'Windows',
+          browser: 'Chrome',
+          deviceType: 'Desktop',
+          userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+          hour: 14,
+          dayOfWeek: 'Monday'
+        },
+        {
+          ip: '192.168.1.2',
+          country: 'Canada',
+          os: 'macOS',
+          browser: 'Safari',
+          deviceType: 'Desktop',
+          userAgent: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36',
+          hour: 16,
+          dayOfWeek: 'Tuesday'
+        },
+        {
+          ip: '192.168.1.3',
+          country: 'United Kingdom',
+          os: 'Windows',
+          browser: 'Firefox',
+          deviceType: 'Desktop',
+          userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:91.0) Gecko/20100101',
+          hour: 10,
+          dayOfWeek: 'Wednesday'
+        }
+      ]
+
+      // Create download records
+      for (const download of demoDownloads) {
+        await prisma.downloadRecord.create({
+          data: download
+        })
       }
-    ]
-    
-    downloadStats.downloads = demoDownloads
-    downloadStats.resumeDownloads = demoDownloads.length
-    
-    // Update analytics
-    demoDownloads.forEach(download => {
-      const hour = new Date(download.timestamp).getHours()
-      const dayOfWeek = new Date(download.timestamp).toLocaleDateString('en-US', { weekday: 'long' })
-      
-      downloadStats.analytics.countries[download.country] = (downloadStats.analytics.countries[download.country] || 0) + 1
-      downloadStats.analytics.operatingSystems[download.os] = (downloadStats.analytics.operatingSystems[download.os] || 0) + 1
-      downloadStats.analytics.browsers[download.browser] = (downloadStats.analytics.browsers[download.browser] || 0) + 1
-      downloadStats.analytics.deviceTypes[download.deviceType] = (downloadStats.analytics.deviceTypes[download.deviceType] || 0) + 1
-      downloadStats.analytics.hourlyDistribution[hour] = (downloadStats.analytics.hourlyDistribution[hour] || 0) + 1
-      downloadStats.analytics.dailyDistribution[dayOfWeek] = (downloadStats.analytics.dailyDistribution[dayOfWeek] || 0) + 1
-    })
+
+      // Create download stats
+      await prisma.downloadStats.create({
+        data: {
+          resumeDownloads: demoDownloads.length,
+          lastUpdated: new Date()
+        }
+      })
+
+      // Initialize analytics
+      await prisma.countryAnalytics.createMany({
+        data: [
+          { country: 'United States', count: 1 },
+          { country: 'Canada', count: 1 },
+          { country: 'United Kingdom', count: 1 }
+        ]
+      })
+
+      await prisma.oSAnalytics.createMany({
+        data: [
+          { os: 'Windows', count: 2 },
+          { os: 'macOS', count: 1 }
+        ]
+      })
+
+      await prisma.browserAnalytics.createMany({
+        data: [
+          { browser: 'Chrome', count: 1 },
+          { browser: 'Safari', count: 1 },
+          { browser: 'Firefox', count: 1 }
+        ]
+      })
+
+      await prisma.deviceTypeAnalytics.createMany({
+        data: [
+          { deviceType: 'Desktop', count: 3 }
+        ]
+      })
+
+      await prisma.hourlyAnalytics.createMany({
+        data: [
+          { hour: 10, count: 1 },
+          { hour: 14, count: 1 },
+          { hour: 16, count: 1 }
+        ]
+      })
+
+      await prisma.dailyAnalytics.createMany({
+        data: [
+          { dayOfWeek: 'Monday', count: 1 },
+          { dayOfWeek: 'Tuesday', count: 1 },
+          { dayOfWeek: 'Wednesday', count: 1 }
+        ]
+      })
+    }
+  } catch (error) {
+    console.error('Error initializing database:', error)
   }
 }
 
 export async function POST(request: NextRequest) {
   try {
-    initializeDemoStats()
+    // Initialize database if needed
+    await initializeDatabase()
     
     // Get client information
     const clientIP = getClientIP(request)
@@ -181,38 +192,86 @@ export async function POST(request: NextRequest) {
     const country = await getCountryFromIP(clientIP)
     
     const now = new Date()
-    const timestamp = now.toISOString()
     const hour = now.getHours()
     const dayOfWeek = now.toLocaleDateString('en-US', { weekday: 'long' })
     
     // Create download record
-    const downloadRecord = {
-      id: downloadStats.downloads.length + 1,
-      timestamp,
-      ip: clientIP,
-      country,
-      os,
-      browser,
-      deviceType,
-      userAgent
+    const downloadRecord = await prisma.downloadRecord.create({
+      data: {
+        ip: clientIP,
+        country,
+        os,
+        browser,
+        deviceType,
+        userAgent,
+        hour,
+        dayOfWeek
+      }
+    })
+    
+    // Update download stats
+    const stats = await prisma.downloadStats.findFirst()
+    if (stats) {
+      await prisma.downloadStats.update({
+        where: { id: stats.id },
+        data: {
+          resumeDownloads: stats.resumeDownloads + 1,
+          lastUpdated: now
+        }
+      })
+    } else {
+      await prisma.downloadStats.create({
+        data: {
+          resumeDownloads: 1,
+          lastUpdated: now
+        }
+      })
     }
     
-    // Update stats
-    downloadStats.downloads.push(downloadRecord)
-    downloadStats.resumeDownloads += 1
-    downloadStats.lastUpdated = timestamp
+    // Update analytics using upsert operations
+    await prisma.countryAnalytics.upsert({
+      where: { country },
+      update: { count: { increment: 1 } },
+      create: { country, count: 1 }
+    })
+
+    await prisma.oSAnalytics.upsert({
+      where: { os },
+      update: { count: { increment: 1 } },
+      create: { os, count: 1 }
+    })
+
+    await prisma.browserAnalytics.upsert({
+      where: { browser },
+      update: { count: { increment: 1 } },
+      create: { browser, count: 1 }
+    })
+
+    await prisma.deviceTypeAnalytics.upsert({
+      where: { deviceType },
+      update: { count: { increment: 1 } },
+      create: { deviceType, count: 1 }
+    })
+
+    await prisma.hourlyAnalytics.upsert({
+      where: { hour },
+      update: { count: { increment: 1 } },
+      create: { hour, count: 1 }
+    })
+
+    await prisma.dailyAnalytics.upsert({
+      where: { dayOfWeek },
+      update: { count: { increment: 1 } },
+      create: { dayOfWeek, count: 1 }
+    })
     
-    // Update analytics
-    downloadStats.analytics.countries[country] = (downloadStats.analytics.countries[country] || 0) + 1
-    downloadStats.analytics.operatingSystems[os] = (downloadStats.analytics.operatingSystems[os] || 0) + 1
-    downloadStats.analytics.browsers[browser] = (downloadStats.analytics.browsers[browser] || 0) + 1
-    downloadStats.analytics.deviceTypes[deviceType] = (downloadStats.analytics.deviceTypes[deviceType] || 0) + 1
-    downloadStats.analytics.hourlyDistribution[hour] = (downloadStats.analytics.hourlyDistribution[hour] || 0) + 1
-    downloadStats.analytics.dailyDistribution[dayOfWeek] = (downloadStats.analytics.dailyDistribution[dayOfWeek] || 0) + 1
+    // Get updated count
+    const updatedStats = await prisma.downloadStats.findFirst()
+    const downloadCount = updatedStats?.resumeDownloads || 0
     
     return NextResponse.json({ 
       success: true, 
-      downloadCount: downloadStats.resumeDownloads,
+      downloadCount,
       downloadRecord
     })
   } catch (error) {
@@ -226,14 +285,43 @@ export async function POST(request: NextRequest) {
 
 export async function GET() {
   try {
-    initializeDemoStats()
+    // Initialize database if needed
+    await initializeDatabase()
+    
+    // Get download stats
+    const stats = await prisma.downloadStats.findFirst()
+    const downloadCount = stats?.resumeDownloads || 0
+    
+    // Get recent downloads
+    const recentDownloads = await prisma.downloadRecord.findMany({
+      orderBy: { timestamp: 'desc' },
+      take: 10
+    })
+    
+    // Get analytics
+    const countries = await prisma.countryAnalytics.findMany()
+    const operatingSystems = await prisma.oSAnalytics.findMany()
+    const browsers = await prisma.browserAnalytics.findMany()
+    const deviceTypes = await prisma.deviceTypeAnalytics.findMany()
+    const hourlyDistribution = await prisma.hourlyAnalytics.findMany()
+    const dailyDistribution = await prisma.dailyAnalytics.findMany()
+    
+    // Convert to the expected format
+    const analytics = {
+      countries: Object.fromEntries(countries.map((c: any) => [c.country, c.count])),
+      operatingSystems: Object.fromEntries(operatingSystems.map((os: any) => [os.os, os.count])),
+      browsers: Object.fromEntries(browsers.map((b: any) => [b.browser, b.count])),
+      deviceTypes: Object.fromEntries(deviceTypes.map((d: any) => [d.deviceType, d.count])),
+      hourlyDistribution: Object.fromEntries(hourlyDistribution.map((h: any) => [h.hour.toString(), h.count])),
+      dailyDistribution: Object.fromEntries(dailyDistribution.map((d: any) => [d.dayOfWeek, d.count]))
+    }
     
     return NextResponse.json({ 
       success: true, 
-      downloadCount: downloadStats.resumeDownloads,
-      analytics: downloadStats.analytics,
-      recentDownloads: downloadStats.downloads.slice(-10), // Last 10 downloads
-      totalDownloads: downloadStats.downloads.length
+      downloadCount,
+      analytics,
+      recentDownloads,
+      totalDownloads: recentDownloads.length
     })
   } catch (error) {
     console.error('Error reading download stats:', error)

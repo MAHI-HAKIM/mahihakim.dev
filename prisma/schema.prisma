@@ -1,0 +1,79 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model DownloadRecord {
+  id          Int      @id @default(autoincrement())
+  timestamp   DateTime @default(now())
+  ip          String
+  country     String
+  os          String
+  browser     String
+  deviceType  String
+  userAgent   String   @db.Text
+  hour        Int
+  dayOfWeek   String
+  
+  @@map("download_records")
+}
+
+model DownloadStats {
+  id              Int      @id @default(autoincrement())
+  resumeDownloads Int      @default(0)
+  lastUpdated     DateTime @default(now())
+  
+  @@map("download_stats")
+}
+
+model CountryAnalytics {
+  id       Int    @id @default(autoincrement())
+  country  String @unique
+  count    Int    @default(0)
+  
+  @@map("country_analytics")
+}
+
+model OSAnalytics {
+  id    Int    @id @default(autoincrement())
+  os    String @unique
+  count Int    @default(0)
+  
+  @@map("os_analytics")
+}
+
+model BrowserAnalytics {
+  id      Int    @id @default(autoincrement())
+  browser String @unique
+  count   Int    @default(0)
+  
+  @@map("browser_analytics")
+}
+
+model DeviceTypeAnalytics {
+  id         Int    @id @default(autoincrement())
+  deviceType String @unique
+  count      Int    @default(0)
+  
+  @@map("device_type_analytics")
+}
+
+model HourlyAnalytics {
+  id    Int @id @default(autoincrement())
+  hour  Int @unique
+  count Int @default(0)
+  
+  @@map("hourly_analytics")
+}
+
+model DailyAnalytics {
+  id        Int    @id @default(autoincrement())
+  dayOfWeek String @unique
+  count     Int    @default(0)
+  
+  @@map("daily_analytics")
+}
