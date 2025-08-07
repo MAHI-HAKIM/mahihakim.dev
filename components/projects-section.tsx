@@ -59,7 +59,7 @@ const ProjectsSection = () => {
     {
       id: 3,
       title: "Santim Dex",
-      category: "web",
+      category: "web3",
       description:
         "Complete visual identity and marketing campaign for a tech startup, including photography and video content.",
       image: "/santimdex.png",
@@ -72,7 +72,7 @@ const ProjectsSection = () => {
     {
       id: 2,
       title: "Bunagram Message App",
-      category: "web3",
+      category: "web",
       description:
         "a real-time messaging application built using Socket.IO for WebSocket-based communication. The application enables users to send and receive messages instantly, whether in direct chats, group chats, or through broadcast messages.",
       image: "/bunagram.png",
