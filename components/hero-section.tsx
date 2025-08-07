@@ -25,6 +25,8 @@ const HeroSection = () => {
         const data = await response.json()
         if (data.success) {
           setDownloadCount(data.downloadCount)
+        } else {
+          console.error('Failed to load download count:', data.error)
         }
       } catch (error) {
         console.error('Error loading download count:', error)

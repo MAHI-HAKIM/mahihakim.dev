@@ -182,6 +182,15 @@ async function initializeDatabase() {
 
 export async function POST(request: NextRequest) {
   try {
+    // Check if DATABASE_URL is available
+    if (!process.env.DATABASE_URL) {
+      console.error('DATABASE_URL environment variable is not set')
+      return NextResponse.json(
+        { success: false, error: 'Database configuration missing' },
+        { status: 500 }
+      )
+    }
+
     // Initialize database if needed
     await initializeDatabase()
     
@@ -285,6 +294,15 @@ export async function POST(request: NextRequest) {
 
 export async function GET() {
   try {
+    // Check if DATABASE_URL is available
+    if (!process.env.DATABASE_URL) {
+      console.error('DATABASE_URL environment variable is not set')
+      return NextResponse.json(
+        { success: false, error: 'Database configuration missing' },
+        { status: 500 }
+      )
+    }
+
     // Initialize database if needed
     await initializeDatabase()
     
