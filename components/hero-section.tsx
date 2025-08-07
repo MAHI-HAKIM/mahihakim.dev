@@ -204,7 +204,7 @@ const HeroSection = () => {
                initial={{ opacity: 0, y: 20 }}
                animate={{ opacity: 1, y: 0 }}
                transition={{ delay: 0.8, duration: 0.8 }}
-               className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start items-start"
+               className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center lg:justify-start lg:items-start"
              >
                <motion.button
                  onClick={() => scrollToNext()}
