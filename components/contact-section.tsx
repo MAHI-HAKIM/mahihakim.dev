@@ -102,7 +102,7 @@ const ContactSection = () => {
     {
       icon: <Linkedin className="w-4 h-4 sm:w-5 sm:h-5" />,
       label: "LinkedIn",
-      href: "https://www.linkedin.com/in/mahi-mohammed-53b4b9251/",
+      href: "https://www.linkedin.com/in/mahi-abdulhakim-mohammed-53b4b9251/",
       color: "hover:text-blue-400",
     },
     { icon: <Twitter className="w-4 h-4 sm:w-5 sm:h-5" />, label: "Twitter", href: "https://www.tiktok.com/@ishowedai", color: "hover:text-blue-400" },
