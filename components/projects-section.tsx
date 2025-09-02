@@ -15,7 +15,7 @@ const ProjectsSection = () => {
     { id: "web", label: "Web Development" },
     { id: "ai", label: "AI Automation" },
     { id: "web3", label: "Web3 Development" },
-    { id: "Cloud and Cybersecurity", label: "Cloud and Cybersecurity" },
+    { id: "Cloud and Cyber security", label: "Cloud and Cybersecurity" },
     { id: "visual", label: "Visual Content" },
   ]
 

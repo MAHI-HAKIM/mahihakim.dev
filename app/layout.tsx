@@ -21,6 +21,20 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                const script = document.createElement('script');
+                script.src = 'https://coline-backend.onrender.com/api/widget/script/d1c68f58-f5df-49d4-a4ae-904641ad91ed?domain=' + encodeURIComponent(window.location.hostname);
+                script.async = true;
+                document.head.appendChild(script);
+              })();
+            `
+          }}
+        />
+      </head>
       <body className={`${inter.className} bg-black text-white antialiased`}>{children}</body>
       <Analytics/>
     </html>
