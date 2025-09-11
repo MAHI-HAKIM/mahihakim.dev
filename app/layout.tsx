@@ -2,6 +2,7 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
+import Script from "next/script";
 import "./globals.css"
 
 const inter = Inter({ subsets: ["latin"] })
@@ -21,21 +22,22 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              (function() {
-                const script = document.createElement('script');
-                script.src = 'https://coline-backend.onrender.com/api/widget/script/d1c68f58-f5df-49d4-a4ae-904641ad91ed?domain=' + encodeURIComponent(window.location.hostname);
-                script.async = true;
-                document.head.appendChild(script);
-              })();
-            `
-          }}
-        />
-      </head>
-      <body className={`${inter.className} bg-black text-white antialiased`}>{children}</body>
+      <body className={`${inter.className} bg-black text-white antialiased`}>{children}
+         <Script
+        id="widget-script"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            (function() {
+              const script = document.createElement('script');
+              script.src = 'https://coline-backend.onrender.com/api/widget/script/72b45042-0073-4967-b7ef-9eb55b7bcd92?domain=' + encodeURIComponent(window.location.hostname);
+              script.async = true;
+              document.head.appendChild(script);
+            })();
+          `
+        }}
+      />
+      </body>
       <Analytics/>
     </html>
   )
