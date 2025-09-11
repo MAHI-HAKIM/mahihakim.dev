@@ -22,7 +22,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="scroll-smooth">
-      <body className={`${inter.className} bg-black text-white antialiased`}>{children}
+      <head>
          <Script
         id="widget-script"
         strategy="afterInteractive"
@@ -37,6 +37,9 @@ export default function RootLayout({
           `
         }}
       />
+      </head>
+      <body className={`${inter.className} bg-black text-white antialiased`}>{children}
+        
       </body>
       <Analytics/>
     </html>
