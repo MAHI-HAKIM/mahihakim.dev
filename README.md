@@ -27,15 +27,6 @@ responsive experience across all devices.
 
 ---
 
-## 📸 Preview
-
-| Home | About | Projects |
-|---|---|---|
-| ![Home](https://raw.githubusercontent.com/MAHI-HAKIM/mahihakim.dev/main/public/home.png) | ![About](https://raw.githubusercontent.com/MAHI-HAKIM/mahihakim.dev/main/public/aboutpage.png) | ![Projects](https://raw.githubusercontent.com/MAHI-HAKIM/mahihakim.dev/main/public/projects.png) |
-
-
----
-
 ## 🗂️ Sections
 
 - **Home** — Hero section with animated avatar and CTA buttons
