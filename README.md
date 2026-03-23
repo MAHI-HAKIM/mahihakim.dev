@@ -31,7 +31,7 @@ responsive experience across all devices.
 
 | Home | About | Projects |
 |---|---|---|
-| ![Home](https://github.com/MAHI-HAKIM/mahihakim.dev/pulic/home.png) | ![About](https://github.com/MAHI-HAKIM/mahihakim.dev/pulic/about.png) | ![Projects](https://github.com/MAHI-HAKIM/mahihakim.dev/pulic/projects.png) |
+| ![Home](https://github.com/MAHI-HAKIM/mahihakim.dev/tree/main/public/home.png) | ![About](https://github.com/MAHI-HAKIM/mahihakim.dev/public/aboutpage.png) | ![Projects](https://github.com/MAHI-HAKIM/mahihakim.dev/public/projects.png) |
 
 ---
 
