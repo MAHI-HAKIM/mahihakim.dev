@@ -31,7 +31,8 @@ responsive experience across all devices.
 
 | Home | About | Projects |
 |---|---|---|
-| ![Home](https://github.com/MAHI-HAKIM/mahihakim.dev/public/home.png) | ![About](https://github.com/MAHI-HAKIM/mahihakim.dev/public/aboutpage.png) | ![Projects](https://github.com/MAHI-HAKIM/mahihakim.dev/public/projects.png) |
+| ![Home](https://raw.githubusercontent.com/MAHI-HAKIM/mahihakim.dev/main/public/home.png) | ![About](https://raw.githubusercontent.com/MAHI-HAKIM/mahihakim.dev/main/public/aboutpage.png) | ![Projects](https://raw.githubusercontent.com/MAHI-HAKIM/mahihakim.dev/main/public/projects.png) |
+
 
 ---
 
