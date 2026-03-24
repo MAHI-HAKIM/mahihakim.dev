@@ -15,6 +15,7 @@ const ProjectsSection = () => {
     { id: "web", label: "Web Development" },
     { id: "ai", label: "AI Automation" },
     { id: "web3", label: "Web3 Development" },
+    {id: "IoT" , label: "IOT and Robotics"},
     { id: "Cloud and Cyber security", label: "Cloud and Cybersecurity" },
     { id: "visual", label: "Visual Content" },
   ]
@@ -33,6 +34,85 @@ const ProjectsSection = () => {
       featured: true,
     },
     {
+      id:9,
+      title: "Cloud Hardening Platform",
+      category: "Cloud and Cybersecurity",
+      description:
+        "Cloud Hardening Platform that automates the process of hardening cloud resources to meet security and CISO compliance requirements.",
+      image: "/cloudhardening.jpg",
+      technologies: ["React", "Ansible", "Cisco Security playbooks", "AWS SDK", "Digital Ocean API"],
+      liveUrl: "https://cloud-hardening-platform.vercel.app",
+      githubUrl: "https://github.com/MAHI-HAKIM/cloud-hardening-platform",
+      featured: true,
+    },
+    {
+      id: 10,
+      title: "Expolaw",
+      category: "web",
+      description: "A fully composed lawfirm systme to take and track appointments for both Admins, Lawyers and Users",
+      image: "/expolaw.png",
+      technologies: ["Next.js", "TypeScript", "Stripe", "PostgreSQL", "Tailwind CSS", "Framer Motion"],
+      liveUrl: "https://expo-lawfirm.vercel.app",
+      githubUrl: "https://github.com/MAHI-HAKIM/expo-lawfirm",
+      videoUrl: "",
+      featured: true,
+    },
+
+    
+    {
+      id: 3,
+      title: "Santim Dex",
+      category: "web3",
+      description:
+        "A decentralized Ethereum-based lending platform, implemented as a smart contract using Solidity.",
+      image: "/santimdex.png",
+      technologies: ["Nextjs", "Web3", "Solidity", "MetaMask", "Cryptology", "Truffle Suite" , "Ganache"],
+      liveUrl: "",
+      githubUrl: "https://github.com/MAHI-HAKIM/DEX-Lending_DAPP/blob/master",
+      videoUrl: "",
+      featured: false,
+    },
+    {
+      id: 11,
+      title: "smart-RFID-library-system",
+      category: "IoT",
+      description:
+        " IoT-based library management and reservation system",
+      image: "/reservation_page.png",
+      technologies: ["NodeMCU(ESP8266)", "React", "Arduino", "Firebase", "React Native (Expo)"],
+      liveUrl: "",
+      githubUrl: "https://github.com/MAHI-HAKIM/smart-RFID-library-system",
+      videoUrl: "",
+      featured: true,
+    },
+    {
+      id: 2,
+      title: "Bunagram Message App",
+      category: "web",
+      description:
+        "a real-time messaging application built using Socket.IO for WebSocket-based communication. The application enables users to send and receive messages instantly, whether in direct chats, group chats, or through broadcast messages.",
+      image: "/bunagram.png",
+      technologies: ["n8n", "OpenAI API", "Python", "MongoDB", "FastAPI", "Docker"],
+      liveUrl: "",
+      githubUrl: "https://github.com/MAHI-HAKIM/Bunagram",
+      videoUrl: "",
+      featured: false,
+    },
+    {
+      id: 13,
+      title: "Pix2Pix-GAN_image_generative_Model",
+      category: "ai",
+      description:
+        "generative ai with pix2pix algorithm to generate a realistic looking pictures using a refrence",
+      image: "/pix2pix.png",
+      technologies: ["Jupyter Notebook", "Python", "TensorFlow", "Datasets", "Kaggle", "Google Maps"],
+      liveUrl: "",
+      githubUrl: "https://github.com/MAHI-HAKIM/Pix2Pix-GAN_image_generative_Model",
+      videoUrl: "",
+      featured: true,
+    },
+    
+    {
       id: 5,
       title: "Content Creation Pipeline",
       category: "ai",
@@ -46,43 +126,6 @@ const ProjectsSection = () => {
       featured: false,
     },
     {
-      id:9,
-      title: "Cloud Hardening Platform",
-      category: "Cloud and Cybersecurity",
-      description:
-        "Cloud Hardening Platform that automates the process of hardening cloud resources to meet security and CISO compliance requirements.",
-      image: "/cloudhardening.jpg",
-      technologies: ["React", "Ansible", "Cisco Security playbooks", "AWS SDK", "Digital Ocean API"],
-      liveUrl: "",
-      githubUrl: "https://github.com/MAHI-HAKIM/Cloud_Hardening_Platform",
-    },
-    {
-      id: 3,
-      title: "Santim Dex",
-      category: "web3",
-      description:
-        "Complete visual identity and marketing campaign for a tech startup, including photography and video content.",
-      image: "/santimdex.png",
-      technologies: ["Adobe Creative Suite", "Final Cut Pro", "After Effects", "Photoshop", "Illustrator"],
-      liveUrl: "",
-      githubUrl: "https://github.com/MAHI-HAKIM/DEX-Lending_DAPP/blob/master",
-      videoUrl: "",
-      featured: false,
-    },
-    {
-      id: 2,
-      title: "Bunagram Message App",
-      category: "web",
-      description:
-        "a real-time messaging application built using Socket.IO for WebSocket-based communication. The application enables users to send and receive messages instantly, whether in direct chats, group chats, or through broadcast messages.",
-      image: "/bunagram.png",
-      technologies: ["n8n", "OpenAI API", "Python", "MongoDB", "FastAPI", "Docker"],
-      liveUrl: "",
-      githubUrl: "https://github.com/MAHI-HAKIM/Bunagram",
-      videoUrl: "",
-      featured: true,
-    },
-    {
       id: 4,
       title: "Simons Game",
       category: "web",
@@ -93,7 +136,7 @@ const ProjectsSection = () => {
       liveUrl: "https://simons-game-v0-0-1.pages.dev/",
       githubUrl: "https://github.com/MAHI-HAKIM/Simons-Game-v0.0.1",
       videoUrl: "",
-      featured: true,
+      featured: false,
     },
     
     {
@@ -120,7 +163,7 @@ const ProjectsSection = () => {
       liveUrl: "",
       githubUrl: "https://github.com/MAHI-HAKIM/Family-Travel-Tracker",
       videoUrl: "",
-      featured: true,
+      featured: false,
     },
     {
       id: 8,
