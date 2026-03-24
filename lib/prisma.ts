@@ -36,22 +36,22 @@ export async function connectWithRetry(retries = 3): Promise<boolean> {
     try {
       // Test connection and clear stale prepared statements
       await prisma.$queryRaw`SELECT 1`;
-      console.log("✅ Database connected successfully");
+      // console.log("✅ Database connected successfully");
       return true;
     } catch (error) {
-      console.log(`❌ Database connection attempt ${i + 1} failed:`, error);
+      // console.log(`❌ Database connection attempt ${i + 1} failed:`, error);
 
       // Handle prepared statement errors specifically
       if (
         error instanceof Error &&
         error.message.includes("prepared statement")
       ) {
-        console.log("🔄 Prepared statement error detected, disconnecting...");
+        // console.log("🔄 Prepared statement error detected, disconnecting...");
         await prisma.$disconnect();
       }
 
       if (i < retries - 1) {
-        console.log(`🔄 Retrying in ${(i + 1) * 1000}ms...`);
+        // console.log(`🔄 Retrying in ${(i + 1) * 1000}ms...`);
         await new Promise((resolve) => setTimeout(resolve, (i + 1) * 1000));
       }
     }
@@ -68,7 +68,7 @@ export async function queryWithRetry<T>(
     try {
       return await queryFn();
     } catch (error: any) {
-      console.log(`Query attempt ${i + 1} failed:`, error?.message);
+      // console.log(`Query attempt ${i + 1} failed:`, error?.message);
 
       // 🎯 Handle prepared statement errors specifically
       if (
@@ -76,7 +76,7 @@ export async function queryWithRetry<T>(
         error?.code === "P2024" ||
         error?.code === "26000"
       ) {
-        console.log("🔄 Prepared statement error detected, reconnecting...");
+        // console.log("🔄 Prepared statement error detected, reconnecting...");
         await prisma.$disconnect();
         await connectWithRetry(1);
 
@@ -103,10 +103,10 @@ export async function queryWithRetry<T>(
 
 // 🔧 Enhanced shutdown handling
 const shutdownHandler = async () => {
-  console.log("🔄 Shutting down database connections...");
+  // console.log("🔄 Shutting down database connections...");
   try {
     await prisma.$disconnect();
-    console.log("✅ Database disconnected successfully");
+    // console.log("✅ Database disconnected successfully");
   } catch (error) {
     console.error("❌ Error during database disconnect:", error);
   }
