@@ -378,7 +378,7 @@ const HeroSection = () => {
       </div>
 
       {/* Enhanced scroll indicator */}
-      <motion.div
+      {/* <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5 }}
@@ -396,7 +396,7 @@ const HeroSection = () => {
         >
           <ChevronDown className="w-5 h-5 sm:w-6 sm:h-6 text-gray-400 group-hover:text-white transition-colors" />
         </motion.button>
-      </motion.div>
+      </motion.div> */}
     </section>
   )
 }
