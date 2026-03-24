@@ -4,15 +4,6 @@ import { motion } from "framer-motion"
 import { useState } from "react"
 
 const SkillsSection = () => {
-  const [activeSkillCategory, setActiveSkillCategory] = useState("development")
-
-  const skillCategories = [
-    { id: "development", label: "Development", icon: "💻" },
-    { id: "ai", label: "AI & Automation", icon: "🤖" },
-    { id: "creative", label: "Creative", icon: "🎨" },
-    { id: "tools", label: "Tools & Platforms", icon: "🛠️" },
-  ]
-
   const skills = {
     development: [
       { name: "Next.js", level: 95, description: "Advanced React framework for production applications" },
@@ -23,12 +14,16 @@ const SkillsSection = () => {
       { name: "GraphQL", level: 80, description: "Efficient API query language" },
     ],
     ai: [
-      { name: "n8n Automation", level: 92, description: "Workflow automation and integration" },
-      { name: "OpenAI API", level: 88, description: "AI model integration and prompt engineering" },
-      { name: "Python", level: 85, description: "Data processing and AI scripting" },
+      { name: "n8n Automation", level: 70, description: "Workflow automation and integration" },
+      { name: "OpenAI API", level: 75, description: "AI model integration and prompt engineering" },
+      { name: "Python", level: 65, description: "Data processing and AI scripting" },
+      { name: "TensorFlow", level: 85, description: "Machine learning and deep learning" },
+      { name: "Keras", level: 45, description: "Machine learning and deep learning" },
+      { name: "PyTorch", level: 55, description: "Machine learning and deep learning" },
+      { name: "Matplotlib", level: 50, description: "Data processing and analysis" },
       { name: "API Integration", level: 90, description: "Third-party service connections" },
-      { name: "Workflow Design", level: 93, description: "Business process automation" },
-      { name: "Data Analysis", level: 82, description: "Insights and pattern recognition" },
+      { name: "Workflow Design", level: 90, description: "Business process automation" },
+      { name: "Data Analysis", level: 80, description: "Insights and pattern recognition" },
     ],
     creative: [
       { name: "Photography", level: 90, description: "Professional product and portrait photography" },
@@ -37,6 +32,12 @@ const SkillsSection = () => {
       { name: "Content Strategy", level: 87, description: "Strategic content planning and execution" },
       { name: "Brand Design", level: 83, description: "Visual identity and brand development" },
       { name: "UI/UX Design", level: 86, description: "User-centered design principles" },
+    ],
+    IoT: [
+      { name: "NodeMCU(ESP8266)", level: 90, description: "IoT development" },
+      { name: "Arduino", level: 85, description: "IoT development" },
+      { name: "Firebase", level: 80, description: "IoT development" },
+      { name: "React Native (Expo)", level: 85, description: "IoT development" },
     ],
     tools: [
       { name: "Git & GitHub", level: 92, description: "Version control and collaboration" },
@@ -47,6 +48,16 @@ const SkillsSection = () => {
       { name: "Analytics", level: 85, description: "Performance monitoring and insights" },
     ],
   }
+
+  const [activeSkillCategory, setActiveSkillCategory] = useState<keyof typeof skills>("development")
+
+  const skillCategories: { id: keyof typeof skills; label: string; icon: string }[] = [
+    { id: "development", label: "Development", icon: "💻" },
+    { id: "ai", label: "AI & Automation", icon: "🤖" },
+    { id: "creative", label: "Creative", icon: "🎨" },
+    { id: "IoT", label: "IoT & Robotics", icon: "🤖" },
+    { id: "tools", label: "Tools & Platforms", icon: "🛠️" },
+  ]
 
   return (
     <section id="skills" className="py-20 relative">
