@@ -2,7 +2,28 @@
 
 import { motion } from "framer-motion"
 import { useState, useEffect } from "react"
+import Image from "next/image"
+import Link from "next/link"
 import { Download, Globe, Monitor, Smartphone, Clock, Calendar } from "lucide-react"
+
+function HomeLogoLink() {
+  return (
+    <Link
+      href="/"
+      className="absolute left-5 top-5 z-30 flex rounded-full border border-white/10 p-2 glass-morphism transition-colors hover:bg-white/10 sm:left-6 sm:top-6 lg:left-8"
+      aria-label="Back to home"
+    >
+      <Image
+        src="/logo.png"
+        alt=""
+        width={40}
+        height={40}
+        className="h-9 w-9 sm:h-10 sm:w-10 object-contain"
+        style={{ filter: "brightness(0) invert(1) drop-shadow(0 0 0 transparent)" }}
+      />
+    </Link>
+  )
+}
 
 /** Matches GET /api/download-track `recentDownloads` select shape (no IP exposed). */
 interface DownloadRecord {
@@ -78,7 +99,8 @@ const AnalyticsDashboard = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center min-h-[400px]">
+      <div className="relative flex min-h-[400px] items-center justify-center">
+        <HomeLogoLink />
         <div className="text-gray-400">Loading analytics...</div>
       </div>
     )
@@ -86,7 +108,8 @@ const AnalyticsDashboard = () => {
 
   if (!data || !data.success) {
     return (
-      <div className="text-center text-gray-400 min-h-[400px] flex items-center justify-center">
+      <div className="relative flex min-h-[400px] flex-col items-center justify-center text-center text-gray-400">
+        <HomeLogoLink />
         No analytics data available
       </div>
     )
@@ -142,7 +165,8 @@ const AnalyticsDashboard = () => {
   )
 
   return (
-    <div className="max-w-7xl mx-auto px-6 sm:px-8 lg:px-12 py-12 space-y-12">
+    <div className="relative mx-auto max-w-7xl space-y-12 px-6 py-12 sm:px-8 lg:px-12">
+      <HomeLogoLink />
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
