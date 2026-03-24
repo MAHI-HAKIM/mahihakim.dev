@@ -3,7 +3,7 @@ import Navigation from "@/components/navigation"
 
 export default function ResumeAnalytics() {
   return <>
-  <Navigation/>
+  {/* <Navigation/> */}
   <AnalyticsDashboard />
   </>
 }

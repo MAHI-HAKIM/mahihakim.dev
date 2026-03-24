@@ -65,7 +65,10 @@ const HeroSection = () => {
       const data = await response.json()
       if (data.success) {
         setDownloadCount(data.downloadCount)
-        console.log('Download tracked successfully:', data.downloadRecord)
+        console.info('Download tracked successfully. Count:', data.downloadCount)
+        if (data.debug) {
+          console.info('[download-track] server geo debug (dev only):', data.debug)
+        }
       } else {
         console.error('Failed to track download:', data.error)
       }
