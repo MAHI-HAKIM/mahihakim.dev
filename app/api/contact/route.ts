@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
                   <tr>
                     <td style="background-color: #0A0A0A; padding: 32px 40px; border-radius: 12px 12px 0 0; text-align: center;">
                       <img
-                        src="https://mahihakim.com/MH-Logo_White_(1).png"
+                        src="https://mahihakim.dev/icon.png"
                         alt="Mahi Hakim"
                         width="60"
                         style="display: block; margin: 0 auto 16px;"
