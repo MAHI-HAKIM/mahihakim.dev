@@ -4,13 +4,14 @@ import type React from "react"
 
 import { motion } from "framer-motion"
 import { useState } from "react"
-import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, Instagram } from "lucide-react"
+import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, Instagram, User, Briefcase, MessageSquare } from "lucide-react"
 import Toast from "@/components/ui/toast"
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    businessName: "",
     subject: "",
     message: "",
   })
@@ -46,7 +47,7 @@ const ContactSection = () => {
           type: "success",
           isVisible: true,
         })
-        setFormData({ name: "", email: "", subject: "", message: "" })
+        setFormData({ name: "", email: "", businessName: "", subject: "", message: "" })
       } else {
         setToast({
           message: result.error || "Failed to send message. Please try again.",
@@ -184,69 +185,100 @@ const ContactSection = () => {
 
             <motion.form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6" variants={containerVariants}>
               <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
-                <motion.div variants={itemVariants} transition={{ duration: 0.6, ease: "easeOut" }}>
+                <motion.div variants={itemVariants} transition={{ duration: 0.6, ease: "easeOut" }} className="relative">
                   <label htmlFor="name" className="block text-xs sm:text-sm font-medium text-gray-300 mb-2">
                     Name
                   </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-gray-800/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-gray-400 focus:ring-1 focus:ring-gray-400 transition-all duration-300 text-sm sm:text-base"
-                    placeholder="Your name"
-                  />
+                  <div className="relative">
+                    <User className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      value={formData.name}
+                      onChange={handleChange}
+                      required
+                      className="w-full pl-10 pr-4 py-2 sm:py-3 bg-gray-800/50 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-white focus:ring-1 focus:ring-white transition-all duration-300 text-sm sm:text-base"
+                      placeholder="Your name"
+                    />
+                  </div>
                 </motion.div>
 
-                <motion.div variants={itemVariants} transition={{ duration: 0.6, ease: "easeOut" }}>
+                <motion.div variants={itemVariants} transition={{ duration: 0.6, ease: "easeOut" }} className="relative">
                   <label htmlFor="email" className="block text-xs sm:text-sm font-medium text-gray-300 mb-2">
                     Email
                   </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-gray-800/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-gray-400 focus:ring-1 focus:ring-gray-400 transition-all duration-300 text-sm sm:text-base"
-                    placeholder="your@email.com"
-                  />
+                  <div className="relative">
+                    <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleChange}
+                      required
+                      className="w-full pl-10 pr-4 py-2 sm:py-3 bg-gray-800/50 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-white focus:ring-1 focus:ring-white transition-all duration-300 text-sm sm:text-base"
+                      placeholder="your@email.com"
+                    />
+                  </div>
                 </motion.div>
               </div>
 
-              <motion.div variants={itemVariants} transition={{ duration: 0.6, ease: "easeOut" }}>
-                <label htmlFor="subject" className="block text-xs sm:text-sm font-medium text-gray-300 mb-2">
-                  Subject
-                </label>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  required
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-gray-800/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-gray-400 focus:ring-1 focus:ring-gray-400 transition-all duration-300 text-sm sm:text-base"
-                  placeholder="Project inquiry"
-                />
-              </motion.div>
+              <div className="grid sm:grid-cols-2 gap-4 sm:gap-6">
+                <motion.div variants={itemVariants} transition={{ duration: 0.6, ease: "easeOut" }} className="relative">
+                  <label htmlFor="businessName" className="block text-xs sm:text-sm font-medium text-gray-300 mb-2">
+                    Business Name <span className="text-gray-500 font-normal">(Optional)</span>
+                  </label>
+                  <div className="relative">
+                    <Briefcase className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                    <input
+                      type="text"
+                      id="businessName"
+                      name="businessName"
+                      value={formData.businessName}
+                      onChange={handleChange}
+                      className="w-full pl-10 pr-4 py-2 sm:py-3 bg-gray-800/50 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-white focus:ring-1 focus:ring-white transition-all duration-300 text-sm sm:text-base"
+                      placeholder="Your company"
+                    />
+                  </div>
+                </motion.div>
+
+                <motion.div variants={itemVariants} transition={{ duration: 0.6, ease: "easeOut" }} className="relative">
+                  <label htmlFor="subject" className="block text-xs sm:text-sm font-medium text-gray-300 mb-2">
+                    Subject
+                  </label>
+                  <div className="relative">
+                    <MessageSquare className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+                    <input
+                      type="text"
+                      id="subject"
+                      name="subject"
+                      value={formData.subject}
+                      onChange={handleChange}
+                      required
+                      className="w-full pl-10 pr-4 py-2 sm:py-3 bg-gray-800/50 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-white focus:ring-1 focus:ring-white transition-all duration-300 text-sm sm:text-base"
+                      placeholder="Project inquiry"
+                    />
+                  </div>
+                </motion.div>
+              </div>
 
               <motion.div variants={itemVariants} transition={{ duration: 0.6, ease: "easeOut" }}>
                 <label htmlFor="message" className="block text-xs sm:text-sm font-medium text-gray-300 mb-2">
                   Message
                 </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  rows={5}
-                  className="w-full px-3 sm:px-4 py-2 sm:py-3 bg-gray-800/50 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-gray-400 focus:ring-1 focus:ring-gray-400 transition-all duration-300 resize-none text-sm sm:text-base"
-                  placeholder="Tell me about your project..."
-                />
+                <div className="relative">
+                  <textarea
+                    id="message"
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    required
+                    rows={5}
+                    className="w-full px-4 py-3 bg-gray-800/50 border border-gray-600 rounded-lg text-white placeholder-gray-500 focus:outline-none focus:border-white focus:ring-1 focus:ring-white transition-all duration-300 resize-none text-sm sm:text-base"
+                    placeholder="Tell me about your project..."
+                  />
+                </div>
               </motion.div>
 
               <motion.button
