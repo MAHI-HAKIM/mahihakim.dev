@@ -5,7 +5,7 @@ import type React from "react"
 import { motion } from "framer-motion"
 import { useState } from "react"
 import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter, Instagram } from "lucide-react"
-import Toast from "./ui/toast"
+import Toast from "@/components/ui/toast"
 
 const ContactSection = () => {
   const [formData, setFormData] = useState({

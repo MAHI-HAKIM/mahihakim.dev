@@ -244,7 +244,7 @@ export async function POST(request: NextRequest) {
       },
     }
 
-    console.log(`${LOG_PREFIX} POST (resume download)`, JSON.stringify(debugPayload, null, 2))
+    // console.log(`${LOG_PREFIX} POST (resume download)`, JSON.stringify(debugPayload, null, 2))
 
     const now = new Date()
     const hour = now.getHours()
