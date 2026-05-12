@@ -22,8 +22,8 @@ export async function POST(request: NextRequest) {
     const displaySubject = subject || businessName || 'No business name'
 
     await resend.emails.send({
-      from: 'Mahi Hakim <contact@mahihakim.com>',
-      to: 'mahihakim20@gmail.com',
+      from: 'Mahi Hakim <contact@mahihakim.dev>',
+      to: 'mahiabdul20@gmail.com',
       replyTo: email,
       subject: `New inquiry from ${name} — ${displaySubject}`,
       html: `
